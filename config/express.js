@@ -18,11 +18,15 @@ var express = require('express'),
 	flash = require('connect-flash'),
 	config = require('./config'),
 	consolidate = require('consolidate'),
+	http = require('http'),
 	path = require('path');
 
 module.exports = function(db) {
 	// Initialize express app
 	var app = express();
+
+	var server = http.createServer(app);
+    var io = require('socket.io').listen(server);
 
 	// Globbing model files
 	config.getGlobbedFiles('./app/models/**/*.js').forEach(function(modelPath) {
@@ -140,5 +144,19 @@ module.exports = function(db) {
 		});
 	});
 
-	return app;
+	io.on('connection', function(socket) {
+	        console.log('connected');
+	        socket.on('message', function(msg) {
+	            io.sockets.emit('broadcast', {
+	                payload: msg,
+	                source: 'from'
+	            });
+	        });
+
+	        socket.on('disconnect', function() {
+	        	console.log('user disconnected');
+	        });
+	    });
+	 
+	return server;
 };
