@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-	db: 'mongodb://localhost/codework-dev',
+	db: 'mongodb://codework:adminpasspass@kahana.mongohq.com:10067/COdeWORK',
 	app: {
 		title: 'COdeWORK - Development Environment'
 	},
