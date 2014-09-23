@@ -1,9 +1,9 @@
 <section ng-repeat="coffice in testCoffices.list">
   <div class="search-result col-sm-12 col-md-4">
-    <div class="overlay col-sm-12"></div>
+    <div class="overlay"></div>
     <img ng-src="{{getCofficePhoto(coffice, '300x300')}}"/>
-    <div class="result-info col-sm-12">
-      <h2>{{coffice.venue.name}}</h2>
+    <div class="result-info">
+      <h3>{{coffice.venue.name}}</h3>
       <p>{{getDistance(coffice)}} miles away</p>
     </div>
   </div>
