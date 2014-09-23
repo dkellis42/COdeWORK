@@ -1,3 +1,10 @@
-<section class="search-result">
-
+<section ng-repeat="coffice in testCoffices">
+  <div class="search-result col-sm-12 col-md-4">
+    <div class="overlay col-sm-12"></div>
+    <img ng-src="{{coffice}}"/>
+    <div class="result-info col-sm-12">
+      <h2>{{coffice.venue.name}}</h2>
+      <p>{{coffice.distance}} miles away</p>
+    </div>
+  </div>
 </section>
