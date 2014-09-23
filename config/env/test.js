@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-	db: 'mongodb://localhost/codework-test',
+	db: 'mongodb://COdeWOrkTest:testest123123@kahana.mongohq.com:10049/COdeWORKTEST',
 	port: 3001,
 	app: {
 		title: 'COdeWORK - Test Environment'
