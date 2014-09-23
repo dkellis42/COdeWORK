@@ -4,7 +4,7 @@
     <img ng-src="{{getCofficePhoto(coffice, '300x300')}}"/>
     <div class="result-info col-sm-12">
       <h2>{{coffice.venue.name}}</h2>
-      <p>{{coffice.venue.location.distance}} miles away</p>
+      <p>{{getDistance(coffice)}} miles away</p>
     </div>
   </div>
 </section>
