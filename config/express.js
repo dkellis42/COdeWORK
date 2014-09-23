@@ -25,9 +25,6 @@ module.exports = function(db) {
 	// Initialize express app
 	var app = express();
 
-	var server = http.createServer(app);
-    var io = require('socket.io').listen(server);
-
 	// Globbing model files
 	config.getGlobbedFiles('./app/models/**/*.js').forEach(function(modelPath) {
 		require(path.resolve(modelPath));
@@ -143,6 +140,10 @@ module.exports = function(db) {
 			error: 'Not Found'
 		});
 	});
+
+	var server = http.createServer(app);
+    var io = require('socket.io').listen(server);
+
 
 	io.on('connection', function(socket) {
 	        console.log('connected');
