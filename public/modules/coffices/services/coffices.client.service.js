@@ -24,4 +24,15 @@ angular.module('coffices')
         return this.toMiles(d);
       };
     }
-  ]);
+  ])
+  // .service('getLocation'), [
+  //   function(){
+  //     var Geo={};
+  //     if (navigator.geolocation) {
+  //       navigator.geolocation.getCurrentPosition(success,error);
+  //     }
+  //     else {
+  //       alert('Geolocation is not supported');
+  //     }
+  //   }
+  // ]);
