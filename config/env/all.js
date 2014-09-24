@@ -28,6 +28,7 @@ module.exports = {
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
 				'public/lib/ngFitText/ng-FitText.js',
 				'public/lib/socket.io-client/socket.io.js', 
+				'public/lib/angularjs-geolocation/src/geolocation.js', 
 				'public/lib/angular-socket-io/socket.io.js', 
 				'public/lib/angular-socket-io/socket.js', 
 				'public/lib/angular-socket-io/socket.io.js'

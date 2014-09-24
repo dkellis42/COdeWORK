@@ -1,4 +1,4 @@
-<section ng-repeat="coffice in testCoffices.list | unique: 'venue.name'">
+<section ng-repeat="coffice in testCoffices.list | unique: 'venue.name' | filter:keywords">
 
   <div class="search-result col-xs-12 col-sm-4 col-md-4" ng-click="hoverOnCoffice(coffice)">
     <div class="overlay"></div>

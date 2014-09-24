@@ -1,7 +1,7 @@
 <section class="coffice-excerpt" ui-scrollfix>
-  <h2>{{hoveredCoffice.venue.name}}</h2>
-  <p>Location: {{hoveredCoffice.venue.location.address}} {{hoveredCoffice.venue.location.city}} {{hoveredCoffice.venue.location.state}}  </p>
-  <p>Hours: {{hoveredCoffice.venue.hours.status}}</p>
+  <h2>{{hoveredCoffice.venue.name || 'Coffice!'}}</h2>
+  <p>Location: {{hoveredCoffice.venue.location.address || 'Address'}} {{hoveredCoffice.venue.location.city || 'City'}} {{hoveredCoffice.venue.location.state || 'State'}}  </p>
+  <p>Hours: {{hoveredCoffice.venue.hours.status || 'Opened/Closed'}}</p>
   <p>WIFI: </p>
   <p>Vibe: </p>
   <p>Coffee: </p>
