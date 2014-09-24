@@ -20,5 +20,11 @@ angular.module('coffices').controller('CofficeController', ['$scope', 'cofficeLo
       var cSuffix = coffice.venue.photos.groups[0].items[0].suffix;
       return cPrefix + size +cSuffix;
     };
+
+    $scope.hoverOnCoffice = function(coffice) {
+		$scope.hoveredCoffice = coffice;	
+    };
+
+
   }
 ]);
