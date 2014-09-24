@@ -1,8 +1,8 @@
 'use strict';
 
 
-angular.module('coffices').controller('CofficeController', ['$scope', 'cofficeLookup', '$http',
-  function($scope, cofficeLookup, $http) {
+angular.module('coffices').controller('CofficeController', ['$scope', 'distance', '$http',
+  function($scope, distance, $http) {
     $scope.clientID = "03YGRUTGE1CNGSV5BZA2JFMUCKZBJEP1YKHPOEGYSRTGU2VG";
     $scope.clientSecret = "15ULA34FN42K3XKHORE4K2CU0Y4CHBHSAIHJ1G01QRPG5Z1H";
     $scope.near = "78704";
@@ -16,15 +16,19 @@ angular.module('coffices').controller('CofficeController', ['$scope', 'cofficeLo
       });
     };
     $scope.getCofficePhoto = function(coffice, size){
-      var cPrefix = coffice.venue.photos.groups[0].items[0].prefix;
-      var cSuffix = coffice.venue.photos.groups[0].items[0].suffix;
+      var cPrefix = coffice.venue.featuredPhotos.items[0].prefix;
+      var cSuffix = coffice.venue.featuredPhotos.items[0].suffix;
       return cPrefix + size +cSuffix;
     };
+
 
     $scope.hoverOnCoffice = function(coffice) {
 		$scope.hoveredCoffice = coffice;	
     };
 
+    $scope.getDistance = function(coffice){
+      return distance.getDistance(coffice);
+    };
 
   }
 ]);
