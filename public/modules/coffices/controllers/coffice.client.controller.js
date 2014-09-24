@@ -29,6 +29,12 @@ angular.module('coffices').controller('CofficeController', ['$scope', 'distance'
       var cSuffix = coffice.venue.featuredPhotos.items[0].suffix;
       return cPrefix + size +cSuffix;
     };
+
+
+    $scope.hoverOnCoffice = function(coffice) {
+		$scope.hoveredCoffice = coffice;	
+    };
+
     $scope.getDistance = function(coffice){
       return distance.getDistance(coffice);
     };
