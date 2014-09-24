@@ -8,12 +8,10 @@ angular.module('coffices').controller('CofficeController', ['$scope', 'distance'
     $scope.near = "78704";
     $scope.query = "coffee,wifi";
     $scope.testCoffices  = {'list':[]};
-    $scope.lookup = function(clientID, clientSecret, near, query){ 
-      clientID = clientID || $scope.clientID;
-      clientSecret = clientSecret || $scope.clientSecret;
+    $scope.lookup = function(near, query){ 
       near = near || $scope.near;
       query = query || $scope.query; 
-      var foursquareQuery = $http.get("https://api.foursquare.com/v2/venues/explore?client_id=" + clientID + "&client_secret=" + clientSecret + "&venuePhotos=1&v=20140910&near=" + near +"&query=" + query);
+      var foursquareQuery = $http.get("https://api.foursquare.com/v2/venues/explore?client_id=" + $scope.clientID + "&client_secret=" + $scope.clientSecret + "&venuePhotos=1&v=20140910&near=" + near +"&query=" + query);
       foursquareQuery.success(function(data, status, headers, config) {
           var returnedData = data.response.groups[0].items;
           for(var i in returnedData){
