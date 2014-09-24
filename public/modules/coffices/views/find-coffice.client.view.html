@@ -1,13 +1,13 @@
-<section data-ng-controller="CofficeController" ng-init="lookup()">
-  <div class="col-sm-12 col-md-8">
+<section data-ng-controller="CofficeController" ng-init="lookup()" ng-class="row">
+  <div class="col-sm-12 col-md-8" ng-submit="get">
     <h2>Find a coffice</h2>
-    <div class="col-sm-12 col-md-4">
+    <div class="col-sm-12 col-md-3">
       <input type="text" name="location" placeholder="Location" />
     </div>
-    <div class="col-sm-12 col-md-4">
+    <div class="col-sm-12 col-md-3">
       <input type="text" name="radius" placeholder="Radius" />
     </div>
-    <div class="col-sm-12 col-md-4">
+    <div class="col-sm-12 col-md-6">
       <input type="text" name="keywords" placeholder="Keywords" />
     </div>
     <search-result></search-result>
