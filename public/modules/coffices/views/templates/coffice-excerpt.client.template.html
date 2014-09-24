@@ -2,7 +2,13 @@
   <div class="row">
     <h2 class="col-sm-12">{{hoveredCoffice.venue.name}}</h2>
     <p class="col-sm-3">Location: </p>
-    <p class="col-sm-9">{{hoveredCoffice.venue.location.address}} {{hoveredCoffice.venue.location.city}} {{hoveredCoffice.venue.location.state}}  </p>
+    <p class="col-sm-9">
+      {{hoveredCoffice.venue.location.formattedAddress[0]}}<br/>
+      {{hoveredCoffice.venue.location.formattedAddress[1]}} 
+    </p>
+    <p class="col-sm-12">Phone: 
+      <span data-ng-bind="hoveredCoffice.venue.contact.formattedPhone"></span>
+    </p>
     <p class="col-sm-12">Hours: </p>
     <div class="col-sm-12 hours-details">
       <p class="col-sm-10 col-sm-offset-1" ng-repeat="timeframe in hoveredCoffice.hours.timeframes">
@@ -13,5 +19,10 @@
     <p class="col-sm-12">Vibe: </p>
     <p class="col-sm-12">Coffee: </p>
     <p class="col-sm-12"><a href="#">Read Reviews</a></p>
+    <p class="social col-sm-12">
+      <a ng-show="hoveredCoffice.venue.contact.twitter" ng-href="http://www.twitter.com/{{hoveredCoffice.venue.contact.twitter}}"><span class="entypo-twitter"></span></a>
+      <a ng-show="hoveredCoffice.venue.contact.facebook" ng-href="http://www.facebook.com/{{hoveredCoffice.venue.contact.facebook}}"><span class="entypo-facebook"></span></a>
+      <a ng-show="hoveredCoffice.venue.url" ng-href="{{hoveredCoffice.venue.url}}"><span class="entypo-monitor"></span></a>
+    </p>
   </div>
 </section>
