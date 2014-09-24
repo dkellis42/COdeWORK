@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('coffices')
-  .service('distance', [
+  .service('distance', [ 
     function(){
       this.rad = function(x) { return x * Math.PI / 180 };
 
