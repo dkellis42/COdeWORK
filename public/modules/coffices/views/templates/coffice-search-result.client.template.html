@@ -1,17 +1,11 @@
 <section ng-repeat="coffice in testCoffices.list">
   <div class="search-result col-sm-12 col-md-4" ng-click="hoverOnCoffice(coffice)">
     <div class="overlay col-sm-12"></div>
-<<<<<<< HEAD
-    <img ng-src="{{getCofficePhoto(coffice, '300x300')}}" />
-    <div class="result-info col-sm-12">	
-      <h2>{{coffice.venue.name | limitTo: 18}}</h2>
-      <p>{{coffice.venue.location.distance}} miles away</p>
-=======
     <img ng-src="{{getCofficePhoto(coffice, '300x300')}}"/>
     <div class="result-info col-sm-12">
       <h2>{{coffice.venue.name}}</h2>
       <p>{{getDistance(coffice)}} miles away</p>
->>>>>>> b4ec7775c53278de0f85d081e72b64e660f0b936
+
     </div>
   </div>
 </section>
