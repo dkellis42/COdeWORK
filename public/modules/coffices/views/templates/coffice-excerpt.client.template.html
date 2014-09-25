@@ -15,16 +15,23 @@
         <span data-ng-bind="timeframe.days"></span>: <span data-ng-bind="timeframe.open[0].renderedTime"></span>
       </p>
     </div>
-    <p class="col-sm-12">WIFI: </p>
-    <p class="col-sm-12">Vibe: </p>
-    <p class="col-sm-12">Coffee: </p>
-    <p class="col-sm-12"><a href="#" ng-click="reviews=true">Read Reviews</a></p>
-    <p class="social col-sm-12">
-      <a ng-show="hoveredCoffice.venue.contact.twitter" ng-href="http://www.twitter.com/{{hoveredCoffice.venue.contact.twitter}}"><span class="entypo-twitter"></span></a>
-      <a ng-show="hoveredCoffice.venue.contact.facebook" ng-href="http://www.facebook.com/{{hoveredCoffice.venue.contact.facebook}}"><span class="entypo-facebook"></span></a>
-      <a ng-show="hoveredCoffice.venue.url" ng-href="{{hoveredCoffice.venue.url}}"><span class="entypo-monitor"></span></a>
-    </p>
-      <google-map class="col-sm-12" center="map.center" draggable="true" options="{styles:map.styles}" zoom="map.zoom"></google-map>
+    <div class="col-sm-8">
+      <p>WIFI: </p>
+      <p>Vibe: </p>
+      <p>Coffee: </p>
+      <p><a href="#" ng-click="reviews=true">Read Reviews</a></p>
+      <p class="social col-sm-12">
+        <a ng-show="hoveredCoffice.venue.contact.twitter" ng-href="http://www.twitter.com/{{hoveredCoffice.venue.contact.twitter}}"><span class="entypo-twitter"></span></a>
+        <a ng-show="hoveredCoffice.venue.contact.facebook" ng-href="http://www.facebook.com/{{hoveredCoffice.venue.contact.facebook}}"><span class="entypo-facebook"></span></a>
+        <a ng-show="hoveredCoffice.venue.url" ng-href="{{hoveredCoffice.venue.url}}"><span class="entypo-monitor"></span></a>
+      </p>
+    </div>
+    <div class="col-sm-4">
+      <img src="modules/coffices/img/coffee.svg"/>
+    </div>
+      <google-map class="col-sm-12" center="map.center" draggable="true" options="{styles:map.styles}" zoom="map.zoom">
+        <marker idKey="coffice-location" coords="map.center"></marker>
+      </google-map>
   </div>
   <div ng-show="reviews">
     <h3 ng-click="reviews=false">Reviews</h3>
