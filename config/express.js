@@ -146,7 +146,6 @@ module.exports = function(db) {
 
 
 	io.on('connection', function(socket) {
-	        console.log('connected');
 	        socket.on('message', function(msg) {
 	            io.sockets.emit('broadcast', {
 	                payload: msg,
