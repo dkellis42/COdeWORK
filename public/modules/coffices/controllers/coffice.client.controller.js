@@ -59,14 +59,67 @@ angular.module('coffices').controller('CofficeController', ['$scope', 'distance'
 
 
     $scope.hoverOnCoffice = function(coffice) {
+      $scope.reviews = false;
 		  $scope.hoveredCoffice = coffice;	
       $scope.details.getHours(coffice, function(data) {
         $scope.hoveredCoffice.hours = data;
+      });
+      $scope.details.getTips(coffice, function(data){
+        $scope.hoveredCoffice.tips = data;
       });
     };
 
     $scope.distance = distance;
 
     $scope.details = cofficeLookup;
+    $scope.map = {
+        center: {
+            latitude: 30.2463,
+            longitude: -97.7609
+        },
+        zoom: 14,
+        styles: [
+          {
+            featureType: "road",
+            elementType: "geometry.fill",
+            stylers: [
+              { color: "#80ff80" }
+            ]
+          },{
+            "elementType": "labels",
+            "stylers": [
+              { "lightness": -100 },
+              { "saturation": -48 },
+              { "gamma": 9.99 },
+              { "visibility": "simplified" },
+              { "color": "#ffffff" }
+            ]
+          },{
+            "elementType": "labels.icon",
+            "stylers": [
+              { "visibility": "off" }
+            ]
+          },{
+            "featureType": "water",
+            "elementType": "geometry",
+            "stylers": [
+              { "visibility": "on" },
+              { "lightness": 100 }
+            ]
+          },{
+            "featureType": "poi",
+            "stylers": [
+              { "visibility": "off" }
+            ]
+          },{
+            "featureType": "landscape",
+            "elementType": "geometry",
+            "stylers": [
+              { "visibility": "simplified" },
+              { "lightness": -100 }
+            ]
+          }
+        ]
+    };
   }
 ]);

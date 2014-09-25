@@ -31,7 +31,12 @@ module.exports = {
 				'public/lib/angularjs-geolocation/src/geolocation.js', 
 				'public/lib/angular-socket-io/socket.io.js', 
 				'public/lib/angular-socket-io/socket.js', 
-				'public/lib/angular-socket-io/socket.io.js'
+				'public/lib/angular-socket-io/socket.io.js',
+				'public/lib/angularjs-geolocation/src/geolocation.js',
+				'http://maps.googleapis.com/maps/api/js?sensor=false',
+				'public/lib/lodash/dist/lodash.min.js',
+				'public/lib/angular-google-maps/dist/angular-google-maps.min.js'
+
 			]
 		},
 		css: [
