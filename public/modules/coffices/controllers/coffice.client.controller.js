@@ -23,16 +23,14 @@ angular.module('coffices').controller('CofficeController', ['$scope', 'distance'
           }
            console.log('data',$scope.testCoffices.list);
            $scope.hoveredCoffice = $scope.testCoffices.list[0];
-           $scope.map.center  = {
-            latitude: $scope.hoveredCoffice.venue.location.lat,
-            longitude: $scope.hoveredCoffice.venue.location.lng
-          };
+           $scope.hoverOnCoffice($scope.hoveredCoffice);
       });
       
     };
 
     $scope.lookup = function(near, query, radius){ 
       near = near || "78702";
+      $scope.testCoffices  = {'list':[]};
       var foursquareQuery = $http.get("https://api.foursquare.com/v2/venues/explore?client_id=" + $scope.clientID + "&client_secret=" + $scope.clientSecret + "&venuePhotos=1&v=20140910&near=" + near +"&query=coffee,wifi" + query, {cache: true});
       foursquareQuery.success(function(data, status, headers, config) {
           var returnedData = data.response.groups[0].items;
@@ -89,13 +87,19 @@ angular.module('coffices').controller('CofficeController', ['$scope', 'distance'
               { color: "#32cd32" }
             ]
           },{
+            featureType: "road",
+            elementType: "geometry.stroke",
+            stylers: [
+              { visibility: "off" }
+            ]
+          },{
             "elementType": "labels",
             "stylers": [
               { "lightness": -100 },
               { "saturation": -48 },
               { "gamma": 9.99 },
               { "visibility": "simplified" },
-              { "color": "#ffffff" }
+              { "color": "#333333" }
             ]
           },{
             "elementType": "labels.icon",
@@ -107,7 +111,7 @@ angular.module('coffices').controller('CofficeController', ['$scope', 'distance'
             "elementType": "geometry",
             "stylers": [
               { "visibility": "on" },
-              { "lightness": 100 }
+              { "color": "#333333" }
             ]
           },{
             "featureType": "poi",
@@ -119,6 +123,12 @@ angular.module('coffices').controller('CofficeController', ['$scope', 'distance'
             "elementType": "geometry",
             "stylers": [
               { "visibility": "simplified" },
+              { "lightness": -100 }
+            ]
+          },{
+            "featureType": "administrative",
+            "elementType": "geometry.stroke",
+            "stylers": [
               { "lightness": -100 }
             ]
           }
