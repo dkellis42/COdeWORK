@@ -29,6 +29,7 @@ angular.module('coffices').controller('CofficeController', ['$scope', 'distance'
 
     $scope.lookup = function(near, query, radius){ 
       near = near || "78702";
+      $scope.testCoffices  = {'list':[]};
       var foursquareQuery = $http.get("https://api.foursquare.com/v2/venues/explore?client_id=" + $scope.clientID + "&client_secret=" + $scope.clientSecret + "&venuePhotos=1&v=20140910&near=" + near +"&query=coffee,wifi" + query, {cache: true});
       foursquareQuery.success(function(data, status, headers, config) {
           var returnedData = data.response.groups[0].items;
