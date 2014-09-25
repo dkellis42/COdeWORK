@@ -1,3 +1,12 @@
-<section class="search-result">
+<section ng-animate="animate" ng-repeat="coffice in testCoffices.list | unique: 'venue.name' | filter: keywords">
 
+  <div class="search-result col-xs-12 col-sm-4 col-md-4" ng-click="hoverOnCoffice(coffice)">
+    <div class="overlay"></div>
+
+    <img ng-src="{{getCofficePhoto(coffice, '300x300')}}"/>
+    <div class="result-info">
+      <h3 data-fittext><span data-ng-bind="coffice.venue.name"></span></h3>
+      <p>{{distance.getDistance(coffice)}} miles away</p>
+    </div>
+  </div>
 </section>

@@ -54,7 +54,7 @@
 	<script type="text/javascript">
 		var user = {{ user | json | safe }};
 	</script>
-
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<!--Application JavaScript Files-->
 	{% for jsFile in jsFiles %}<script type="text/javascript" src="{{jsFile}}"></script>
 	{% endfor %} 
