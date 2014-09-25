@@ -29,10 +29,6 @@ angular.module('coffices').controller('CofficeController', ['$scope', 'distance'
 
     $scope.lookup = function(near, query, radius){ 
       near = near || "78702";
-
-      $scope.testCoffices  = {'list':[]};
-
-      // radius = "&radius=" + radius;
       var foursquareQuery = $http.get("https://api.foursquare.com/v2/venues/explore?client_id=" + $scope.clientID + "&client_secret=" + $scope.clientSecret + "&venuePhotos=1&v=20140910&near=" + near +"&query=coffee,wifi" + query, {cache: true});
       foursquareQuery.success(function(data, status, headers, config) {
           var returnedData = data.response.groups[0].items;
@@ -60,7 +56,11 @@ angular.module('coffices').controller('CofficeController', ['$scope', 'distance'
 
     $scope.hoverOnCoffice = function(coffice) {
       $scope.reviews = false;
-		  $scope.hoveredCoffice = coffice;	
+		  $scope.hoveredCoffice = coffice;
+      $scope.map.center	= {
+        latitude: $scope.hoveredCoffice.venue.location.lat,
+        longitude: $scope.hoveredCoffice.venue.location.lng
+      };
       $scope.details.getHours(coffice, function(data) {
         $scope.hoveredCoffice.hours = data;
       });
@@ -68,14 +68,13 @@ angular.module('coffices').controller('CofficeController', ['$scope', 'distance'
         $scope.hoveredCoffice.tips = data;
       });
     };
-
     $scope.distance = distance;
 
     $scope.details = cofficeLookup;
     $scope.map = {
         center: {
-            latitude: 30.2463,
-            longitude: -97.7609
+            latitude: 50,
+            longitude:-60
         },
         zoom: 14,
         styles: [
@@ -83,7 +82,7 @@ angular.module('coffices').controller('CofficeController', ['$scope', 'distance'
             featureType: "road",
             elementType: "geometry.fill",
             stylers: [
-              { color: "#80ff80" }
+              { color: "#32cd32" }
             ]
           },{
             "elementType": "labels",

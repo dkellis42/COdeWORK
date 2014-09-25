@@ -24,6 +24,7 @@
       <a ng-show="hoveredCoffice.venue.contact.facebook" ng-href="http://www.facebook.com/{{hoveredCoffice.venue.contact.facebook}}"><span class="entypo-facebook"></span></a>
       <a ng-show="hoveredCoffice.venue.url" ng-href="{{hoveredCoffice.venue.url}}"><span class="entypo-monitor"></span></a>
     </p>
+      <google-map class="col-sm-12" center="map.center" draggable="true" options="{styles:map.styles}" zoom="map.zoom"></google-map>
   </div>
   <div ng-show="reviews">
     <h3 ng-click="reviews=false">Reviews</h3>
