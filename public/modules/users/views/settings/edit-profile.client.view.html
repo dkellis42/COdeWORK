@@ -1,26 +1,51 @@
 <section class="row" data-ng-controller="SettingsController">
 <div class="col-sm-12 col-md-6">
-	
+	<div class="nearby">
+		<h2>Some coders are nearby!</h2>
+		<p><small>Click any name to find out what they're working on.</small></p>
+		<ul class="coders">
+			<li>Quin Adney</li>
+			<li>Derek Ellis</li>
+		</ul>
+	</div>
+	<h2>Your Glimpse</h2>
+	<div class="col-sm-4">
+		<img ng-src="{{user.providerData.avatar_url}}" width="100%" />
+	</div>
+	<div class="col-sm-8">
+		<h3>Name</h3>
+		<p data-ng-bind="user.displayName"></p>
+		<h3>Skills</h3>
+		<p>CSS//Design//SASS//Javascript</p>
+		<h3>Goals</h3>
+		<p>Node mastery</p>
+		<p>Rails sufficiency</p>
+		<p>Completing this project</p>
+		<h3>Favorite Coffice</h3>
+		<p>Mozart's</p>
+	</div>
 </div>
-<div class="col-sm-12 col-md-6">
+<div class="col-sm-12 col-md-6 question-container">
 	<h2>Your Status</h2>
 	<div class="question col-sm-12">
-		<h3>What are you working on?</h3>
+		<h4>What are you working on?</h4><div class="arrow-right"></div>
 		<div click-to-edit="user.workingOn"></div>
 	</div>
 	<div class="question col-sm-12">
-		<h3>Code School Progress</h3>
-		<img class="col-sm-2" src="modules/coffices/img/coffee.svg"/>
-		<img class="col-sm-2" src="modules/coffices/img/coffee.svg"/>
-		<img class="col-sm-2" src="modules/coffices/img/coffee.svg"/>
+		<h4>Code School Progress</h4><div class="arrow-right"></div>
+		<div class="col-sm-12">
+			<img class="col-sm-2" src="modules/coffices/img/coffee.svg"/>
+			<img class="col-sm-2" src="modules/coffices/img/coffee.svg"/>
+			<img class="col-sm-2" src="modules/coffices/img/coffee.svg"/>
+		</div>
 	</div>
 	<div class="question col-sm-12">
-		<h3>Need help with anything?</h3>
+		<h4>Need help with anything?</h4><div class="arrow-right"></div>
 		<div click-to-edit="user.needsHelpWith"></div>
 		<p></p>
 	</div>
 	<div class="question col-sm-12">
-		<h3>What kind of codeworker are you looking for?</h3>
+		<h4>What kind of codeworker are you looking for?</h4><div class="arrow-right"></div>
 		<label ng-repeat="type in codeWorkerTypes" for="{{type}}">
 			<input type="checkbox" name="{{type}}" id="{{type}}" value="{{type}}"/>
 			<p>{{type}}</p>
