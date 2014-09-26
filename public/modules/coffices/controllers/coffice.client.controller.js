@@ -12,9 +12,8 @@ angular.module('coffices').controller('CofficeController', ['$scope', 'distance'
 
     $scope.initUp = function(near, query, radius) {
       // near = near || "78702";
-      console.log($scope.coords)
 
-      var foursquareQuery = $http.get("https://api.foursquare.com/v2/venues/explore?client_id=" + $scope.clientID + "&client_secret=" + $scope.clientSecret + "&venuePhotos=1&v=20140910&ll=" + 30 + ',' + -97 + "&query=coffee,wifi" + query);
+      var foursquareQuery = $http.get("https://api.foursquare.com/v2/venues/explore?client_id=" + $scope.clientID + "&client_secret=" + $scope.clientSecret + "&venuePhotos=1&v=20140910&near=austin&query=coffee,wifi");
       foursquareQuery.success(function(data, status, headers, config) {
           var returnedData = data.response.groups[0].items;
           for(var i in returnedData){
@@ -23,16 +22,15 @@ angular.module('coffices').controller('CofficeController', ['$scope', 'distance'
             }
           }
            console.log('data',$scope.testCoffices.list);
+           $scope.hoveredCoffice = $scope.testCoffices.list[0];
+           $scope.hoverOnCoffice($scope.hoveredCoffice);
       });
       
     };
 
     $scope.lookup = function(near, query, radius){ 
       near = near || "78702";
-
       $scope.testCoffices  = {'list':[]};
-
-      // radius = "&radius=" + radius;
       var foursquareQuery = $http.get("https://api.foursquare.com/v2/venues/explore?client_id=" + $scope.clientID + "&client_secret=" + $scope.clientSecret + "&venuePhotos=1&v=20140910&near=" + near +"&query=coffee,wifi" + query, {cache: true});
       foursquareQuery.success(function(data, status, headers, config) {
           var returnedData = data.response.groups[0].items;
@@ -41,7 +39,6 @@ angular.module('coffices').controller('CofficeController', ['$scope', 'distance'
               $scope.testCoffices.list.push(returnedData[i]);
             }
           }
-           console.log('data',$scope.testCoffices.list);
       });
     };
     $scope.getCofficePhoto = function(coffice, size){
@@ -59,14 +56,83 @@ angular.module('coffices').controller('CofficeController', ['$scope', 'distance'
 
 
     $scope.hoverOnCoffice = function(coffice) {
-		  $scope.hoveredCoffice = coffice;	
+      $scope.reviews = false;
+		  $scope.hoveredCoffice = coffice;
+      $scope.map.center	= {
+        latitude: $scope.hoveredCoffice.venue.location.lat,
+        longitude: $scope.hoveredCoffice.venue.location.lng
+      };
       $scope.details.getHours(coffice, function(data) {
         $scope.hoveredCoffice.hours = data;
       });
+      $scope.details.getTips(coffice, function(data){
+        $scope.hoveredCoffice.tips = data;
+      });
     };
-
     $scope.distance = distance;
 
     $scope.details = cofficeLookup;
+    $scope.map = {
+        center: {
+            latitude: 50,
+            longitude:-60
+        },
+        zoom: 14,
+        disableDefaultUI: true,
+        styles: [
+          {
+            featureType: "road",
+            elementType: "geometry.fill",
+            stylers: [
+              { color: "#32cd32" }
+            ]
+          },{
+            featureType: "road",
+            elementType: "geometry.stroke",
+            stylers: [
+              { visibility: "off" }
+            ]
+          },{
+            "elementType": "labels",
+            "stylers": [
+              { "lightness": -100 },
+              { "saturation": -48 },
+              { "gamma": 9.99 },
+              { "visibility": "simplified" },
+              { "color": "#333333" }
+            ]
+          },{
+            "elementType": "labels.icon",
+            "stylers": [
+              { "visibility": "off" }
+            ]
+          },{
+            "featureType": "water",
+            "elementType": "geometry",
+            "stylers": [
+              { "visibility": "on" },
+              { "color": "#333333" }
+            ]
+          },{
+            "featureType": "poi",
+            "stylers": [
+              { "visibility": "off" }
+            ]
+          },{
+            "featureType": "landscape",
+            "elementType": "geometry",
+            "stylers": [
+              { "visibility": "simplified" },
+              { "lightness": -100 }
+            ]
+          },{
+            "featureType": "administrative",
+            "elementType": "geometry.stroke",
+            "stylers": [
+              { "lightness": -100 }
+            ]
+          }
+        ]
+    };
   }
 ]);

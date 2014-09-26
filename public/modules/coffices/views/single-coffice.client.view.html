@@ -1,3 +1,17 @@
-<section ng-controller="CofficeController" ng-class="row">
-
+<section ng-controller="CofficeController">
+  <div class="row" id="coffice-info">
+    <div class="col-md-6">
+      <div class="search-result">
+        <div class="overlay"></div>
+        <img ng-src="{{getCofficePhoto(coffice, '300x300')}}"/>
+        <div class="result-info">
+          <h3 data-fittext><span data-ng-bind="coffice.venue.name"></span></h3>
+          <p>{{distance.getDistance(coffice)}} miles away</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" id="reviews">
+    <div ng-repeat="review in reviews"></div>
+  </div>
 </section>

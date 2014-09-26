@@ -1,36 +1,13 @@
 <section data-ng-controller="HomeController">
-	<h1>h1</h1>
-	<h2>h2</h2>
-	<h3>h3</h3>
-	<h3 class="light">h3 light</h3>
-	<h4>h4</h4>
-	<p>this is a paragraph</p>
-	<a href="#">this is a link</a>
-	<div class="col">
-	  <h3>Messages</h3>
-	  <div class="overflowable">
-	    <p ng-repeat="message in messages">{{message}}: {{message.text}}</p>
-	  </div>
-	</div>
-	<div class="col">
-	  <h3>Users</h3>
-	  <div class="overflowable">
-	    <p ng-repeat="user in users">{{user}}</p>
-	  </div>
-	</div>
-	<div class="clr">
-	  <form ng-submit="sendMessage()">Message: 
-	    <input size="60" ng-model="message">
-	    <input type="submit" value="Send">
-	  </form>
-	</div>
-	<div class="clr">
-	  <h3>Change your name</h3>
-	  <p>Your current user name is {{name}}</p>
-	  <form ng-submit="changeName()">
-	    <input ng-model="newName">
-	    <input type="submit" value="Change Name">
-	  </form>
+	<div class="jumbotron row">
+		<div class="headline col-sm-12">
+			<h1 data-fittext>CO(de)WORK</h1>
+		</div>
+		<div class="images">
+			<img class="col-sm-4" src="modules/core/img/5.jpg"/>
+			<img class="col-sm-4" src="modules/core/img/3.jpg"/>
+			<img class="col-sm-4" src="modules/core/img/9.jpg"/>
+		</div>
 	</div>
 </section>
 
