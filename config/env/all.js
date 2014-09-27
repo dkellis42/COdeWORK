@@ -34,6 +34,7 @@ module.exports = {
 				'public/lib/angular-socket-io/socket.io.js',
 				'public/lib/angularjs-geolocation/src/geolocation.js',
 				'http://maps.googleapis.com/maps/api/js?sensor=false',
+				'http://cdn.pubnub.com/pubnub-3.1.min.js',
 				'public/lib/lodash/dist/lodash.min.js',
 				'public/lib/angular-google-maps/dist/angular-google-maps.min.js'
 

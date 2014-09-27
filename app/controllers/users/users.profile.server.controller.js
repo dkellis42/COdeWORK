@@ -23,9 +23,10 @@ exports.update = function(req, res) {
 	if (user) {
 		// Merge existing user
 		user = _.extend(user, req.body);
+		console.log(user);
 		user.updated = Date.now();
-		user.displayName = user.firstName + ' ' + user.lastName;
-
+		// user.displayName = user.firstName + ' ' + user.lastName;
+		console.log(user.updated);
 		user.save(function(err) {
 			if (err) {
 				return res.status(400).send({
