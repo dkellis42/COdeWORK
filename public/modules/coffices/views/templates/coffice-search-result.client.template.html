@@ -1,7 +1,9 @@
 <section ng-animate="animate" ng-repeat="coffice in testCoffices.list | unique: 'venue.name' | filter: keywords">
 
   <div class="search-result col-xs-12 col-sm-4 col-md-4" ng-click="hoverOnCoffice(coffice)">
-    <div class="overlay"></div>
+    <div class="overlay">
+      <span ng-click="favorite=!favorite" ng-class="{'entypo-heart-empty': !favorite, 'entypo-heart': favorite}" tooltip="save to favorites" tooltip-placement="right"></span>
+    </div>
 
     <img ng-src="{{getCofficePhoto(coffice, '300x300')}}"/>
     <div class="result-info">
