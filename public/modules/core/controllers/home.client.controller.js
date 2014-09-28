@@ -20,7 +20,6 @@ angular.module('core')
     	function($scope, Authentication, $animate) {
 
 	        $scope.authentication = Authentication;
-	        console.log($scope.authentication);
 	            $animate.addClass('.headline div','test-add', function(){
 	            	console.log('arggghhh');
 	            });
@@ -30,8 +29,10 @@ angular.module('core')
 	            $scope.limit = 20;
 
 	            $scope.publish = function(){
+	            	$scope.message.user = Authentication.user.displayName;
+	            	$scope.message.email = Authentication.user.email;
+	            	$scope.message.avatar = Authentication.user.providerData.avatar_url;
 	                
-
 	                $('#progress_bar').slideToggle();
 	                
 	                 PUBNUB.publish({

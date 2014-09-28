@@ -12,7 +12,7 @@
   </div>
   <div class="col-sm-4 user-search-results">
     <div class="keyword-filter">
-      <input type="text" placeholder="filter results by keyword"/>
+      <input type="text" placeholder="filter results by keyword" ng-enter="searchUsers()"/>
     </div>
     <ul>
       <li ng-repeat="user in markers">
