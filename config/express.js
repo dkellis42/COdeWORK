@@ -146,11 +146,18 @@ module.exports = function(db) {
 
 
 	io.on('connection', function(socket) {
-	        socket.on('message', function(msg) {
+		console.log('user connected')
+	        socket.on('message', function(from, msg) {
+	        	// console.log('recieved message from', 
+                // from, 'msg', JSON.stringify(msg));
+			    console.log('broadcasting message');
+    		    console.log('payload is', msg);
+
 	            io.sockets.emit('broadcast', {
 	                payload: msg,
-	                source: 'from'
+	                source: from
 	            });
+	            console.log('broadcast complete');
 	        });
 
 	        socket.on('disconnect', function() {
