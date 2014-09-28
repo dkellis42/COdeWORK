@@ -36,13 +36,15 @@ module.exports = {
 				'http://maps.googleapis.com/maps/api/js?sensor=false',
 				'http://cdn.pubnub.com/pubnub-3.1.min.js',
 				'public/lib/lodash/dist/lodash.min.js',
-				'public/lib/angular-google-maps/dist/angular-google-maps.min.js'
+				'public/lib/angular-google-maps/dist/angular-google-maps.min.js',
+				'public/lib/wterm/wterm.jquery.js'
 
 			]
 		},
 		css: [
 			'public/modules/**/css/*.css',
-			'public/stylesheets/bootstrap.css'
+			'public/stylesheets/bootstrap.css',
+			'public/lib/jquery.terminal.css'
 		],
 		js: [
 			'public/config.js',
