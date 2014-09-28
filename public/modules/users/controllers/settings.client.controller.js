@@ -91,7 +91,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
         '</div>' +
         '<div ng-show="view.editorEnabled">' +
             '<input ng-model="view.editableValue">' +
-            '<a href="#" ng-click="save()">Save</a>' +
+            '<span ng-click="updateUserProfile(true)">Save</span>' +
             ' or ' +
             '<a ng-click="disableEditor()">cancel</a>.' +
         '</div>' +

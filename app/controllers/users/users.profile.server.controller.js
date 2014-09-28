@@ -17,15 +17,19 @@ exports.update = function(req, res) {
 	var user = req.user;
 	var message = null;
 
+	// console.log(user)
+	console.log(req.body);
 	// For security measurement we remove the roles from the req.body object
-	delete req.body.roles;
-
+	// delete req.body.roles;
+	console.log(req)
+	console.log(user);
 	if (user) {
 		// Merge existing user
-		user = _.extend(user, req.body);
-		user.updated = Date.now();
-		user.displayName = user.firstName + ' ' + user.lastName;
+		// user = _.extend(user, req.body);
+		// user.updated = Date.now();
+		// user.displayName = user.firstName + ' ' + user.lastName;
 
+		user = _.extend(user, req.body);
 		user.save(function(err) {
 			if (err) {
 				return res.status(400).send({
