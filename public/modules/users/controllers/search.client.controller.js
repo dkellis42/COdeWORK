@@ -16,6 +16,11 @@ angular.module('users').controller('SearchController', ['$scope', 'geolocation',
         // });
     });
     
+    $scope.searchUsers = function() {
+      $scope.users = Users.query();
+      console.log($scope.users);
+    };
+
     $scope.map = {
       center: {
           latitude: 60,

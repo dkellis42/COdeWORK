@@ -21,10 +21,10 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 			return $scope.user.provider === provider || ($scope.user.additionalProvidersData && $scope.user.additionalProvidersData[provider]);
 		};
 
-		$scope.listUserAccounts = function() { 
-			$scope.users = Users.query();
-			console.log($scope.users);
-		};
+		// $scope.listUserAccounts = function() { 
+		// 	$scope.users = Users.query();
+		// 	// console.log(user, $scope.users);
+		// };
 
 		// Remove a user social account
 		$scope.removeUserSocialAccount = function(provider) {
@@ -83,50 +83,50 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 		$scope.stubHelp = "I'm a little stuck with setting up node, so it would be great if someone experienced with it could help me out.";
 	}
 ])
-.directive("clickToEdit", function() {
-    var editorTemplate = '<div class="click-to-edit">' +
-        '<div ng-hide="view.editorEnabled">' +
-            '{{value}} ' +
-            '<a ng-click="enableEditor()">Edit</a>' +
-        '</div>' +
-        '<div ng-show="view.editorEnabled">' +
-            '<input ng-model="view.editableValue">' +
-            '<a href="#" ng-click="save(); updateUserProfile(true)">Save</a>' +
-            ' or ' +
-            '<a ng-click="disableEditor()">cancel</a>.' +
-        '</div>' +
-    '</div>';
+// .directive("clickToEdit", function() {
+//     var editorTemplate = '<div class="click-to-edit">' +
+//         '<div ng-hide="view.editorEnabled">' +
+//             '{{value}} ' +
+//             '<a ng-click="enableEditor()">Edit</a>' +
+//         '</div>' +
+//         '<div ng-show="view.editorEnabled">' +
+//             '<input ng-model="view.editableValue">' +
+//             '<a href="#" ng-click="save(); updateUserProfile(true)">Save</a>' +
+//             ' or ' +
+//             '<a ng-click="disableEditor()">cancel</a>.' +
+//         '</div>' +
+//     '</div>';
 
-    return {
-        restrict: "A",
-        replace: true,
-        template: editorTemplate,
-        scope: {
-            value: "=clickToEdit",
-        },
-        controller: function($scope) {
-            $scope.view = {
-                editableValue: $scope.value,
-                editorEnabled: false
-            };
+//     return {
+//         restrict: "A",
+//         replace: true,
+//         template: editorTemplate,
+//         scope: {
+//             value: "=clickToEdit",
+//         },
+//         controller: function($scope) {
+//             $scope.view = {
+//                 editableValue: $scope.value,
+//                 editorEnabled: false
+//             };
 
-            $scope.enableEditor = function() {
-                $scope.view.editorEnabled = true;
-                $scope.view.editableValue = $scope.value;
-            };
+//             $scope.enableEditor = function() {
+//                 $scope.view.editorEnabled = true;
+//                 $scope.view.editableValue = $scope.value;
+//             };
 
-            $scope.disableEditor = function() {
-                $scope.view.editorEnabled = false;
-            };
+//             $scope.disableEditor = function() {
+//                 $scope.view.editorEnabled = false;
+//             };
 
-            $scope.save = function() {
-                $scope.value = $scope.view.editableValue;
-                console.log($scope.value)
-                $scope.disableEditor();
-            };
-        }
-    };
-})
+//             $scope.save = function() {
+//                 $scope.value = $scope.view.editableValue;
+//                 console.log($scope.value)
+//                 $scope.disableEditor();
+//             };
+//         }
+//     };
+// })
 .directive('ngEnter', 
   function () {
     return function (scope, element, attrs) {
