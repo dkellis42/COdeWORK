@@ -35,15 +35,7 @@
 	<h2>Your Status</h2>
 	<div class="question col-sm-12">
 		<h4>What are you working on?</h4><div class="arrow-right"></div>
-		<input type="hidden" id="firstName" name="firstName" class="form-control" data-ng-model="user.firstName" placeholder="First Name">
-		<input type="hidden" id="lastName" name="lastName" class="form-control" data-ng-model="user.lastName" placeholder="Last Name">
-		<input type="hidden" id="email" name="email" class="form-control" data-ng-model="user.email" placeholder="Email">
-		<input type="hidden" id="username" name="username" class="form-control" data-ng-model="user.username" placeholder="Username">
-
-
-
-
-		<input data-ng-model="user.workingOn" placeholder="{{user.displayName}}" ng-enter="updateUserProfile(true)">
+		<input data-ng-model="user.workingOn" placeholder="{{user.workingOn}}" ng-enter="updateUserProfile(true)">
 		<!-- <div click-to-edit="user.workingOn"></div> -->
 	</div>
 	<div class="question col-sm-12" ng-controller="TimepickerCtrl">
@@ -55,8 +47,8 @@
 	</div>
 	<div class="question col-sm-12" data-ng-controller="SettingsController">
 		<h4>Need help with anything?</h4><div class="arrow-right"></div>
-		<div click-to-edit="user.needsHelpWith">{{user.needsHelpWith}}</div>
-		<p></p>
+		<input data-ng-model="user.needsHelpWith" placeholder="{{user.needsHelpWith}}" ng-enter="updateUserProfile(true)">
+		
 	</div>
 	<div class="question col-sm-12" data-ng-controller="SettingsController">
 		<h4>What kind of codeworker are you looking for?</h4><div class="arrow-right"></div>
@@ -64,6 +56,9 @@
 			<input type="checkbox" name="{{type}}" id="{{type}}" value="{{type}}"/>
 			<p>{{type}}</p>
 		</label>
+	</div>
+	<div data-ng-show="success" class="text-center text-success">
+		<strong>Profile Saved Successfully</strong>
 	</div>
 </div>
 	<div>
