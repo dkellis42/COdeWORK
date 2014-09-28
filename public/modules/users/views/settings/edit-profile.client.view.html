@@ -50,7 +50,7 @@
 		<input data-ng-model="user.needsHelpWith" placeholder="{{user.needsHelpWith}}" ng-enter="updateUserProfile(true)">
 		
 	</div>
-	<div class="question col-sm-12" data-ng-controller="SettingsController">
+	<div id="worker-types" class="question col-sm-12" data-ng-controller="SettingsController">
 		<h4>What kind of codeworker are you looking for?</h4><div class="arrow-right"></div>
 		<label ng-repeat="type in codeWorkerTypes" for="{{type}}">
 			<input type="checkbox" name="{{type}}" id="{{type}}" value="{{type}}"/>

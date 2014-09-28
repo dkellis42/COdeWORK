@@ -19,7 +19,7 @@ angular.module('core').service('Terminal', [
     this.createTerminal = function() {
         $('#terminal').wterm()
     };
-    var command_directory = {
+    this.command_directory = {
         'eval': function( tokens ) {
            tokens.shift();
            var expression = tokens.join( ' ' );
@@ -48,6 +48,16 @@ angular.module('core').service('Terminal', [
            var url = tokens[1];
            document.location.href = url;
          },
+         'add': function( tokens ) {
+          tokens.shift();
+           var workerType = tokens.join( ' ' );
+           var newLabel =  '<label for="'+ workerType +'">' +
+              '<input type="checkbox" id='+ workerType +' value='+ workerType +'/>' +
+              '<p>'+workerType+'</p></label>';
+           var div = document.getElementById('worker-types');
+           div.innerHTML += newLabel;
+           return 'added ' + workerType + '!';
+         },
  
          'strrev': {
            PS1: 'strrev $',
@@ -65,8 +75,8 @@ angular.module('core').service('Terminal', [
          }
       };
 
-      for( var j in command_directory ) {
-        $.register_command( j, command_directory[j] );
+      for( var j in this.command_directory ) {
+        $.register_command( j, this.command_directory[j] );
       }
 
       $.register_command( 'help', function() {
@@ -75,7 +85,8 @@ angular.module('core').service('Terminal', [
           'date - Returns Current Date<br>' + 
           'cap  - Usage cap &lt;string&gt; - Turns the string to upcase<br>' +
           'go - Usage go &lt;url&gt; - Sets the browser location to URL<br>' +
-          'strrev - A Sub-Terminal, Takes any input reverses the string and spits it out'
+          'strrev - A Sub-Terminal, Takes any input reverses the string and spits it out<br>' +
+          'add - Usage add &lt;string&gt; adds a coworker type to the options'
 
       });
 
