@@ -25,9 +25,6 @@ module.exports = function(db) {
 	// Initialize express app
 	var app = express();
 
-	var server = http.createServer(app);
-    var io = require('socket.io').listen(server);
-
 	// Globbing model files
 	config.getGlobbedFiles('./app/models/**/*.js').forEach(function(modelPath) {
 		require(path.resolve(modelPath));
@@ -144,8 +141,11 @@ module.exports = function(db) {
 		});
 	});
 
+	var server = http.createServer(app);
+    var io = require('socket.io').listen(server);
+
+
 	io.on('connection', function(socket) {
-	        console.log('connected');
 	        socket.on('message', function(msg) {
 	            io.sockets.emit('broadcast', {
 	                payload: msg,

@@ -14,8 +14,10 @@ angular.module('core').controller('HeaderController', ['$scope', 'Authentication
 		$scope.$on('$stateChangeSuccess', function() {
 			$scope.isCollapsed = false;
 		});
+
 		$scope.cPage = function(){
 			return /\w+/.exec(window.location.hash).toString();
 		};
+
 	}
 ]);

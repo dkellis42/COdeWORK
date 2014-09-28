@@ -4,7 +4,8 @@
 angular.module('core').service('Terminal', [
 
   function() {
-    this.createView(){
+
+    this.createView = function(){
       var $view = "<div></div>";
       for(var i in commands){
         $view.append('<p>'+commands[i]+'</p>');

@@ -21,6 +21,11 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 			return $scope.user.provider === provider || ($scope.user.additionalProvidersData && $scope.user.additionalProvidersData[provider]);
 		};
 
+		$scope.listUserAccounts = function() { 
+			$scope.users = Users.query();
+			console.log($scope.users);
+		};
+
 		// Remove a user social account
 		$scope.removeUserSocialAccount = function(provider) {
 			$scope.success = $scope.error = null;
@@ -43,6 +48,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 			if (isValid){
 				$scope.success = $scope.error = null;
 				var user = new Users($scope.user);
+				console.log(user)
 	
 				user.$update(function(response) {
 					$scope.success = true;
@@ -115,8 +121,22 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 
             $scope.save = function() {
                 $scope.value = $scope.view.editableValue;
+                console.log($scope.value)
                 $scope.disableEditor();
             };
         }
+    };
+})
+.directive('ngEnter', 
+  function () {
+    return function (scope, element, attrs) {
+        element.bind("keydown keypress", function (event) {
+            if(event.which === 13) {
+                scope.$apply(function (){
+                    scope.$eval(attrs.ngEnter);
+                }); 
+                event.preventDefault();
+            }
+        });
     };
 });

@@ -1,4 +1,14 @@
-<section class="row" controller="UsersController">
-  <input type="text" placeholder="radius"/>
-  <input type="text" placeholder="keywords"/>
+<section class="row" controller="SearchController">
+  <div class="col-md-6 col-sm-12">
+    <input type="text" placeholder="radius"/>
+  </div>
+  <div class="col-md-6 col-sm-12">
+    <input type="text" placeholder="keywords"/>
+  </div>
+  <div class="col-sm-12">
+    <google-map center="map.center" draggable="true" options="{styles:map.styles}" zoom="map.zoom">
+      <markers models="markers" coords="'coords'" idKey="'idKey'" isLabel="true" options="'options'">
+      </markers>
+    </google-map>
+  </div>
 </section>
