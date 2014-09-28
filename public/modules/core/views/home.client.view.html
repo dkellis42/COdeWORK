@@ -1,4 +1,4 @@
-<section data-ng-controller="HomeController" ng-init='init()'>
+<section data-ng-controller="HomeController">
 	<div class="jumbotron row">
 		<div class="headline col-sm-12">
 			<h1 data-fittext>CO(de)WORK</h1>
@@ -31,7 +31,7 @@
 	<div id="messages" class="table-striped">
 	    <div class="message" ng-repeat="message in messages" cool-fade>
 	    <div class="avatar-frame">
-	    <img ng-src="http://www.gravatar.com/avatar/{{authentication.user.email}}?s=60&r=R&d=https://www.guardly.com/commonassets/images/img_profile_placeholder.png" class="avatar avatar-60 photo" height="60" width="60"/>
+	    <img ng-src="{{authentication.user.providerData.avatar_url}}" class="avatar avatar-60 photo" height="60" width="60"/>
 	    </div>
 	    <p class="user">{{authentication.user.displayName}} said:</p>
 	        <p class="text">{{message.text}}</p>
