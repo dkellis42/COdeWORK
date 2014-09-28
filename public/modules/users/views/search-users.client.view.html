@@ -1,0 +1,28 @@
+<section class="row" controller="SearchController">
+  <div class="search-row">
+    <div class="col-md-6 col-sm-12">
+      <input type="text" placeholder="radius"/>
+    </div>
+    <div class="col-md-6 col-sm-12">
+      <input type="text" placeholder="keywords"/>
+    </div>
+  </div>
+  <div class="col-sm-8">
+    <google-map center="map.center" draggable="true" options="{styles:map.styles}" zoom="map.zoom">
+      <markers models="markers" coords="'coords'" idKey="'idKey'" isLabel="true" options="'options'">
+      </markers>
+    </google-map>
+  </div>
+  <div class="col-sm-4 user-search-results">
+    <ul>
+      <li ng-repeat="user in markers">
+        <div class="col-sm-9">
+          <span data-ng-bind="user.name"></span>
+        </div>
+        <div class="col-sm-3">
+          <span class="entypo-mail" tooltip="send a message" tooltip-placement="left" ng-click="open(600)"></span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>

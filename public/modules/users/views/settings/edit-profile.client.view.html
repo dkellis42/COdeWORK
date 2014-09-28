@@ -1,6 +1,6 @@
 <section class="row" data-ng-controller="SettingsController" ng-init="listUserAccounts()">
 <div class="col-sm-12 col-md-6">
-	<div class="nearby">
+	<div class="nearby col-sm-12">
 		<h2>Some coders are nearby!</h2>
 		<p><small>Click any name to find out what they're working on.</small></p>
 		<ul class="coders">
@@ -8,36 +8,34 @@
 			<li>Derek Ellis</li>
 		</ul>
 	</div>
-	<h2>Your Glimpse</h2>
-	<div class="col-sm-4">
-		<img ng-src="{{user.providerData.avatar_url}}" width="100%" />
-	</div>
-	<div class="col-sm-8">
-		<h3>Name</h3>
-		<p data-ng-bind="user.displayName"></p>
-		<h3>Skills</h3>
-		<p>CSS//Design//SASS//Javascript</p>
-		<h3>Goals</h3>
-		<p>Node mastery</p>
-		<p>Rails sufficiency</p>
-		<p>Completing this project</p>
-		<h3>Favorite Coffice</h3>
-		<p>Mozart's</p>
-	</div>
+	<div class="nearby col-sm-12">
+	<p></p>
+		<p style="color:lime;">What would you like to do?</p>
+		<p style="color:lime;">> Edit glimpse</p>
+		<p style="color:lime;">> View glimpse</p>
+		<!-- <h2>Your Glimpse</h2>
+		<div class="col-sm-4">
+			<img ng-src="{{user.providerData.avatar_url}}" width="100%" />
+		</div>
+		<div class="col-sm-8">
+			<h3>Name</h3>
+			<p data-ng-bind="user.displayName"></p>
+			<h3>Skills</h3>
+			<p>CSS//Design//SASS//Javascript</p>
+			<h3>Goals</h3>
+			<p>Node mastery</p>
+			<p>Rails sufficiency</p>
+			<p>Completing this project</p>
+			<h3>Favorite Coffice</h3>
+			<p>Mozart's</p>
+		</div>
+	</div> -->
 </div>
-<div class="col-sm-12 col-md-6 question-container">
+<div class="col-sm-12 col-md-6 question-container" ui-scrollfix>
 	<h2>Your Status</h2>
 	<div class="question col-sm-12">
 		<h4>What are you working on?</h4><div class="arrow-right"></div>
-		<input type="hidden" id="firstName" name="firstName" class="form-control" data-ng-model="user.firstName" placeholder="First Name">
-		<input type="hidden" id="lastName" name="lastName" class="form-control" data-ng-model="user.lastName" placeholder="Last Name">
-		<input type="hidden" id="email" name="email" class="form-control" data-ng-model="user.email" placeholder="Email">
-		<input type="hidden" id="username" name="username" class="form-control" data-ng-model="user.username" placeholder="Username">
-
-
-
-
-		<input data-ng-model="user.workingOn" placeholder="{{user.displayName}}" ng-enter="updateUserProfile(true)">
+		<input data-ng-model="user.workingOn" placeholder="{{user.workingOn}}" ng-enter="updateUserProfile(true)">
 		<!-- <div click-to-edit="user.workingOn"></div> -->
 	</div>
 	<div class="question col-sm-12">
@@ -50,8 +48,8 @@
 	</div>
 	<div class="question col-sm-12">
 		<h4>Need help with anything?</h4><div class="arrow-right"></div>
-		<div click-to-edit="user.needsHelpWith">{{user.needsHelpWith}}</div>
-		<p></p>
+		<input data-ng-model="user.needsHelpWith" placeholder="{{user.needsHelpWith}}" ng-enter="updateUserProfile(true)">
+		
 	</div>
 	<div class="question col-sm-12">
 		<h4>What kind of codeworker are you looking for?</h4><div class="arrow-right"></div>
@@ -59,6 +57,9 @@
 			<input type="checkbox" name="{{type}}" id="{{type}}" value="{{type}}"/>
 			<p>{{type}}</p>
 		</label>
+	</div>
+	<div data-ng-show="success" class="text-center text-success">
+		<strong>Profile Saved Successfully</strong>
 	</div>
 </div>
 	<div>
