@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('users').controller('SearchController', ['$scope', 'geolocation', 'Users', 'Authentication',
-  function($scope, geolocation, Users, Authentication) {
+angular.module('users').controller('SearchController', ['$scope', 'geolocation', 'Users', 'Authentication', '$modal',
+  function($scope, geolocation, Users, Authentication, $modal) {
     $scope.user = Authentication.user;
     $scope.markers = [];
     geolocation.getLocation().then(function(data){
@@ -102,6 +102,14 @@ angular.module('users').controller('SearchController', ['$scope', 'geolocation',
       console.log('markers', $scope.markers);
       console.log('users', allUsers);
     });
+    $scope.open = function (size) {
+
+      var modalInstance = $modal.open({
+        templateUrl: 'modules/users/views/chat-modal.client.view.html',
+        controller: 'SearchController',
+        size: size
+      });
+    };
     
   }
 ]);
