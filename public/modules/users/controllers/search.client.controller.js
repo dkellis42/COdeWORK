@@ -7,25 +7,13 @@ angular.module('users').controller('SearchController', ['$scope', 'geolocation',
     geolocation.getLocation().then(function(data){
       $scope.map.center = {latitude:data.coords.latitude, longitude:data.coords.longitude};
       $scope.user.location.latitude = data.coords.latitude;
-      Users.query(function(response){
-      var size = response.length;
-      var allUsers = response.slice(0,size);
-      for (var i in allUsers){
-          console.log(i);
-          var args = {
-            'name': allUsers[i].displayName, 
-            'coords': {
-              'latitude': parseFloat(allUsers[i].location.latitude), 
-              'longitude': parseFloat(allUsers[i].location.longitude)
-            }, 
-            'idKey': i, 
-            'workingOn': allUsers[i].workingOn, 
-            'options': {
-              'labelContent': allUsers[i].displayName
-            }
-          };
-          markers.push(args);
-      }
+      //And this is where the location updating would happen...IF IT WORKED!  
+        //   user.$update(function(response) {
+        //   $scope.success = true;
+        //   Authentication.user = response;
+        // }, function(response) {
+        //   $scope.error = response.data.message;
+        // });
     });
     
     $scope.map = {
@@ -91,6 +79,25 @@ angular.module('users').controller('SearchController', ['$scope', 'geolocation',
       ]
     };
     var markers = [];
+    Users.query(function(response){
+        var size = response.length;
+        var allUsers = response.slice(0,size);
+        for (var i in allUsers){
+            console.log(i);
+            var args = {
+              'name': allUsers[i].displayName, 
+              'coords': {
+                'latitude': parseFloat(allUsers[i].location.latitude), 
+                'longitude': parseFloat(allUsers[i].location.longitude)
+              }, 
+              'idKey': i, 
+              'workingOn': allUsers[i].workingOn, 
+              'options': {
+                'labelContent': allUsers[i].displayName
+              }
+            };
+            markers.push(args);
+        }
       $scope.markers = markers;
       console.log('markers', $scope.markers);
       console.log('users', allUsers);
