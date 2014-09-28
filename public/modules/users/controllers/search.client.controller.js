@@ -85,12 +85,12 @@ angular.module('users').controller('SearchController', ['$scope', 'geolocation',
         for (var i in allUsers){
             console.log(i);
             var args = {
-              'name': allUsers[i].displayName, 
+              'name': allUsers[i].displayName,
               'coords': {
                 'latitude': parseFloat(allUsers[i].location.latitude), 
                 'longitude': parseFloat(allUsers[i].location.longitude)
               }, 
-              'idKey': i, 
+              'id': allUsers[i]._id, 
               'workingOn': allUsers[i].workingOn, 
               'options': {
                 'labelContent': allUsers[i].displayName

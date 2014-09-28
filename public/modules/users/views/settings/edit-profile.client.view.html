@@ -1,6 +1,6 @@
-<section class="row" data-ng-controller="SettingsController" ng-init="listUserAccounts()">
+<section class="row">
 <div class="col-sm-12 col-md-6">
-	<div class="nearby col-sm-12">
+	<div class="nearby col-sm-12" data-ng-controller="SettingsController">
 		<h2>Some coders are nearby!</h2>
 		<p><small>Click any name to find out what they're working on.</small></p>
 		<ul class="coders">
@@ -8,7 +8,7 @@
 			<li>Derek Ellis</li>
 		</ul>
 	</div>
-	<div class="nearby col-sm-12">
+	<div class="nearby col-sm-12" data-ng-controller="SettingsController">
 	<p></p>
 		<p style="color:lime;">What would you like to do?</p>
 		<p style="color:lime;">> Edit glimpse</p>
@@ -31,7 +31,7 @@
 		</div>
 	</div> -->
 </div>
-<div class="col-sm-12 col-md-6 question-container" ui-scrollfix>
+<div class="col-sm-12 col-md-6 question-container" ui-scrollfix data-ng-controller="SettingsController">
 	<h2>Your Status</h2>
 	<div class="question col-sm-12">
 		<h4>What are you working on?</h4><div class="arrow-right"></div>
@@ -46,20 +46,19 @@
 		<input data-ng-model="user.workingOn" placeholder="{{user.displayName}}" ng-enter="updateUserProfile(true)">
 		<!-- <div click-to-edit="user.workingOn"></div> -->
 	</div>
-	<div class="question col-sm-12">
-		<h4>Code School Progress</h4><div class="arrow-right"></div>
+	<div class="question col-sm-12" ng-controller="TimepickerCtrl">
+		<h4>Usual work hours</h4><div class="arrow-right"></div>
 		<div class="col-sm-12">
-			<img class="col-sm-2" src="modules/coffices/img/coffee.svg"/>
-			<img class="col-sm-2" src="modules/coffices/img/coffee.svg"/>
-			<img class="col-sm-2" src="modules/coffices/img/coffee.svg"/>
+			  <timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+			  <button class="btn btn-danger" ng-click="clear()">Clear</button>
 		</div>
 	</div>
-	<div class="question col-sm-12">
+	<div class="question col-sm-12" data-ng-controller="SettingsController">
 		<h4>Need help with anything?</h4><div class="arrow-right"></div>
 		<div click-to-edit="user.needsHelpWith">{{user.needsHelpWith}}</div>
 		<p></p>
 	</div>
-	<div class="question col-sm-12">
+	<div class="question col-sm-12" data-ng-controller="SettingsController">
 		<h4>What kind of codeworker are you looking for?</h4><div class="arrow-right"></div>
 		<label ng-repeat="type in codeWorkerTypes" for="{{type}}">
 			<input type="checkbox" name="{{type}}" id="{{type}}" value="{{type}}"/>
