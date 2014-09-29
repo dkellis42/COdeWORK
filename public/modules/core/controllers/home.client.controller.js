@@ -39,6 +39,7 @@ angular.module('core')
 	            	$scope.message.user = Authentication.user.displayName;
 	            	$scope.message.email = Authentication.user.email;
 	            	$scope.message.avatar = Authentication.user.providerData.avatar_url;
+	            	$scope.message.timestamp = Date.now();
 	                
 	                $('#progress_bar').slideToggle();
 	                
