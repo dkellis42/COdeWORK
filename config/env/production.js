@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-	db: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://localhost/codework',
+	db: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://codework:adminpasspass@kahana.mongohq.com:10067/COdeWORK',
 	assets: {
 		lib: {
 			css: [
