@@ -2,8 +2,6 @@
 
 module.exports = {
 	db: 'mongodb://codework:adminpasspass@kahana.mongohq.com:10067/COdeWORK',
-	// db: 'mongodb://localhost/mean-dev',
-
 	app: {
 		title: 'COdeWORK - Development Environment'
 	},

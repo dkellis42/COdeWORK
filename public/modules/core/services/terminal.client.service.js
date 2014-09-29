@@ -1,7 +1,7 @@
 'use strict';
 
 //Add an interactive terminal-like window
-angular.module('core').service('Terminal', [ 
+angular.module('core').service('Terminal', [
 
   function() {
 
@@ -16,8 +16,8 @@ angular.module('core').service('Terminal', [
       'Edit glimpse',
       'View glimpse'
     ];
-    this.createTerminal = function() {
-        $('#terminal').wterm()
+    this.createTerminal = function(user) {
+        $('#terminal').wterm(user);
     };
     this.command_directory = {
         'eval': function( tokens ) {
@@ -57,6 +57,17 @@ angular.module('core').service('Terminal', [
            var div = document.getElementById('worker-types');
            div.innerHTML += newLabel;
            return 'added ' + workerType + '!';
+         },
+         'editname': function(tokens) {
+            tokens.shift();
+            var currName = document.getElementById('display-name');
+            currName.value = tokens.join( ' ' );
+            console.log('curr', currName);
+            console.log('tokens', tokens);
+         },
+         'myinfo': function(tokens){
+            
+          return document.getElementById('display-name').innerHTML;
          }
       };
 
@@ -69,7 +80,8 @@ angular.module('core').service('Terminal', [
           'eval - Usage eval &lt;any javascript exression&gt;<br>' +
           'date - Returns Current Date<br>' + 
           'go - Usage go &lt;url&gt; - Sets the browser location to URL<br>' +
-          'add - Usage add &lt;string&gt; adds a coworker type to the options'
+          'add - Usage add &lt;string&gt; adds a coworker type to the options' +
+          'editname - Usage editname &lt;string&gt; changes your display name'
 
       });
 

@@ -73,9 +73,6 @@ exports.read = function(req, res) {
 	}, function(err, user) {
 		res.jsonp(user);
 	});
-
-	// console.log('blah', user._conditions.profile);
-	// res.user._conditions.profile;
 };
 
 /**

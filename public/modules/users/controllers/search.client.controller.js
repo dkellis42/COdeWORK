@@ -7,21 +7,7 @@ angular.module('users').controller('SearchController', ['$scope', '$stateParams'
     geolocation.getLocation().then(function(data){
       $scope.map.center = {latitude:data.coords.latitude, longitude:data.coords.longitude};
       $scope.user.location.latitude = data.coords.latitude;
-      //And this is where the location updating would happen...IF IT WORKED!  
-        //   user.$update(function(response) {
-        //   $scope.success = true;
-        //   Authentication.user = response;
-        // }, function(response) {
-        //   $scope.error = response.data.message;
-        // });
     });
-
-    // $scope.findOne = function() {
-    //   $scope.viewProfile = Users.get({
-    //     userId: $stateParams.userId
-    //   });
-
-    // };
 
     $scope.find = function() {
       $scope.users = Users.query();
@@ -102,7 +88,7 @@ angular.module('users').controller('SearchController', ['$scope', '$stateParams'
                 'latitude': parseFloat(allUsers[i].location.latitude), 
                 'longitude': parseFloat(allUsers[i].location.longitude)
               }, 
-              '_id': allUsers[i]._id, 
+              '_id': allUsers[i]._id,
               'workingOn': allUsers[i].workingOn, 
               'options': {
                 'labelContent': allUsers[i].displayName

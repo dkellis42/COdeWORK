@@ -56,8 +56,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$stateParam
 			if (isValid){
 				$scope.success = $scope.error = null;
 				var user = new Users($scope.user);
-				console.log(user)
-	
+				console.log('user',user);
 				user.$update(function(response) {
 					$scope.success = true;
 					Authentication.user = response;
@@ -68,7 +67,9 @@ angular.module('users').controller('SettingsController', ['$scope', '$stateParam
 				$scope.submitted = true;
 			}
 		};
-
+    Users.query(function(response){
+    	$scope.allUsers = response;
+    });
 		// Change user password
 		$scope.changeUserPassword = function() {
 			$scope.success = $scope.error = null;
@@ -91,6 +92,69 @@ angular.module('users').controller('SettingsController', ['$scope', '$stateParam
 		$scope.stubHelp = "I'm a little stuck with setting up node, so it would be great if someone experienced with it could help me out.";
 	}
 ])
+
+.directive("clickToEdit", function() {
+    var editorTemplate = '<div class="click-to-edit" ng-enter="save()">' +
+        '<div ng-hide="view.editorEnabled">' +
+            '{{value}} ' +
+            '<a ng-click="enableEditor()">Edit</a>' +
+        '</div>' +
+        '<div ng-show="view.editorEnabled">' +
+            '<input ng-model="view.editableValue">' +
+            '<a ng-click="save(); updateUserProfile(true)">Save</a>' +
+            ' or ' +
+            '<a ng-click="disableEditor()">cancel</a>.' +
+        '</div>' +
+    '</div>';
+
+    return {
+        restrict: "A",
+        replace: true,
+        template: editorTemplate,
+        scope: {
+            value: "=clickToEdit",
+            toSave: "@clickToEdit",
+            user: "=user"
+        },
+        controller: function($scope, Users, Authentication) {
+            $scope.view = {
+                editableValue: $scope.value,
+                editorEnabled: false
+            };
+
+            $scope.enableEditor = function() {
+                $scope.view.editorEnabled = true;
+                $scope.view.editableValue = $scope.value;
+            };
+
+            $scope.disableEditor = function() {
+                $scope.view.editorEnabled = false;
+            };
+            $scope.save = function() {
+                $scope.value = $scope.view.editableValue;
+                $scope.toSave = $scope.view.editableValue;
+                $scope.updateUserProfile(true);
+                console.log('click save', $scope.value)
+                $scope.disableEditor();
+            };
+            $scope.updateUserProfile = function(isValid) {
+							if (isValid){
+								$scope.success = $scope.error = null;
+								var user = new Users($scope.user);
+								console.log('user',user);
+								user.$update(function(response) {
+									$scope.success = true;
+									Authentication.user = response;
+								}, function(response) {
+									$scope.error = response.data.message;
+								});
+							} else {
+								$scope.submitted = true;
+							}
+						};
+        }
+    };
+})
 
 .directive('ngEnter', 
   function () {
