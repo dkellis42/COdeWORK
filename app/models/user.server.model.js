@@ -6,7 +6,6 @@
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema,
 	crypto = require('crypto');
-
 /**
  * A Validation function for local strategy properties
  */
@@ -67,6 +66,19 @@ var UserSchema = new Schema({
 		type: String,
 		trim: true,
 		default: ''
+	},
+	timeframe: {
+		beginWork: {
+			type: Date,
+			default: Date.now
+		},
+		endWork: {
+			type: Date,
+			default: Date.now
+		}
+	},
+	favoriteCoffices: {
+		type: Array
 	},
 	username: {
 		type: String,

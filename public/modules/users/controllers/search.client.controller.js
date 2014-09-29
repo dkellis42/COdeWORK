@@ -95,7 +95,7 @@ angular.module('users').controller('SearchController', ['$scope', 'geolocation',
                 'latitude': parseFloat(allUsers[i].location.latitude), 
                 'longitude': parseFloat(allUsers[i].location.longitude)
               }, 
-              'id': allUsers[i]._id, 
+              'idKey': allUsers[i]._id, 
               'workingOn': allUsers[i].workingOn, 
               'options': {
                 'labelContent': allUsers[i].displayName

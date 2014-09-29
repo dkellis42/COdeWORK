@@ -129,7 +129,7 @@
   * represents a ( or a group ) of HTML NODE (s)
   *
   **/
-  $.fn.wterm = function( options ) {
+  $.fn.wterm = function( user, options ) {
 
 
     // Merge defaults with options
@@ -148,7 +148,11 @@
       // required for terminal emulation
       element.addClass( settings.TERMINAL_CLASS ).addClass( settings.DEFAULT_THEME );
       if( settings.WIDTH && settings.HEIGHT ) element.css( { width: settings.WIDTH, height: settings.HEIGHT } )
-      element.html( '' ).append( '<div>' + settings.WELCOME_MESSAGE + '</div>' );
+      if( user.displayName == '' ){
+        element.html( '' ).append( "<div>Looks like you're new here. To set your name, type 'edit name'.</div>" );
+      } else {
+        element.html( '' ).append( '<div>' + settings.WELCOME_MESSAGE + '</div>' );
+      }
 
       element.append( '<div class="' + settings.CONTENT_CLASS + '"></div>' );
       element.append( '<div><span class="' + settings.PROMPT_CLASS + '">' + settings.PS1 + '&nbsp;</span>' +
