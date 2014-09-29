@@ -28,7 +28,7 @@
     return {
 
       // PS1 : The Primary Prompt
-      PS1                : 'wterm $',
+      PS1                : 'codework $',
 
       // TERMINAL_CLASS  
       // Will be applied to the primary terminal container
@@ -44,7 +44,7 @@
 
       // DEFAULT_THEME
       // The theme that is applied by default
-      DEFAULT_THEME      : '_green_on_black',
+      DEFAULT_THEME      : 'green_on_black',
 
       // HIGHLIGHT_CLASS
       // The Class that is applied to highlighted text
@@ -67,7 +67,7 @@
       // WELCOME_MESSAGE
       // Message to be shown when the terminal is first 
       // published
-      WELCOME_MESSAGE    : 'Welcome to Wterm version-' + VERSION ,
+      WELCOME_MESSAGE    : 'Welcome to Co(de)work editor<br><br>Type <strong>help</strong> to see available commands<br><br>',
 
       // NOT_FOUND
       // Message to be published if the command is not found
@@ -146,7 +146,7 @@
       
       // Set up some markup in the element
       // required for terminal emulation
-      element.addClass( settings.TERMINAL_CLASS ).addClass( settings.THEME_CLASS_PREFIX + settings.DEFAULT_THEME );
+      element.addClass( settings.TERMINAL_CLASS ).addClass( settings.DEFAULT_THEME );
       if( settings.WIDTH && settings.HEIGHT ) element.css( { width: settings.WIDTH, height: settings.HEIGHT } )
       element.html( '' ).append( '<div>' + settings.WELCOME_MESSAGE + '</div>' );
 
@@ -243,7 +243,7 @@
         e.preventDefault();
         e.stopPropagation();
 
-        var value = input.val();
+        var value = input.val().toLowerCase();
 
         if( settings.HISTORY ) {
           if( history.length > settings.HISTORY_ENTRIES ) history.shift();
@@ -251,7 +251,7 @@
         }
         
         // Reset The Input
-        input.attr( 'value', '' );
+        input.val('');
         var tokens = value.split( /\s+/ );
         var key    = tokens[0];
         

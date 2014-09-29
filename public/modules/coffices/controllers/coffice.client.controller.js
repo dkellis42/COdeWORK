@@ -6,13 +6,21 @@ angular.module('coffices').controller('CofficeController', ['$scope', 'distance'
     $scope.clientID = '03YGRUTGE1CNGSV5BZA2JFMUCKZBJEP1YKHPOEGYSRTGU2VG';
     $scope.clientSecret = '15ULA34FN42K3XKHORE4K2CU0Y4CHBHSAIHJ1G01QRPG5Z1H';
     $scope.testCoffices  = {'list':[]};
+    $scope.favoriteCofficeList = [];
     geolocation.getLocation().then(function(data){
       $scope.coords = {lat:data.coords.latitude, long:data.coords.longitude};
     });
-
+    $scope.favoriteCoffices = function(coffice, inFavorites) {
+      if(inFavorites){
+        $scope.favoriteCofficeList.push(coffice.venue.id);
+      } else {
+        console.log('nope');
+      }
+      console.log('favorites', $scope.favoriteCofficeList);
+    };
     $scope.initUp = function(near, query, radius) {
       // near = near || "78702";
-
+      $scope.noresult = '';
       var foursquareQuery = $http.get("https://api.foursquare.com/v2/venues/explore?client_id=" + $scope.clientID + "&client_secret=" + $scope.clientSecret + "&venuePhotos=1&v=20140910&near=austin&query=coffee,wifi");
       foursquareQuery.success(function(data, status, headers, config) {
           var returnedData = data.response.groups[0].items;
@@ -34,9 +42,11 @@ angular.module('coffices').controller('CofficeController', ['$scope', 'distance'
       var foursquareQuery = $http.get("https://api.foursquare.com/v2/venues/explore?client_id=" + $scope.clientID + "&client_secret=" + $scope.clientSecret + "&venuePhotos=1&v=20140910&near=" + near +"&query=coffee,wifi" + query, {cache: true});
       foursquareQuery.success(function(data, status, headers, config) {
           var returnedData = data.response.groups[0].items;
-          for(var i in returnedData){
-            if (returnedData[i].venue.photos.count > 0 ){
-              $scope.testCoffices.list.push(returnedData[i]);
+          if (returnedData.length > 0){
+            for(var i in returnedData){
+              if (returnedData[i].venue.photos.count > 0 ){
+                $scope.testCoffices.list.push(returnedData[i]);
+              }
             }
           }
       });

@@ -6,14 +6,11 @@
         <input type="text" name="location" placeholder="Location" ng-model='locationSearch' ng-enter='lookup(locationSearch)'/>
       </div>
       <div class="col-sm-12 col-md-3">
-        <input type="text" name="radius" placeholder="Radius" />
+        <input type="text" name="radius" placeholder="Radius" ng-model="radius" ng-enter='lookup(locationSearch, query, radius)'/>
       </div>
       <div class="col-sm-12 col-md-6">
-        <input type="text" name="keywords" placeholder="Keywords" ng-model="keywords" />
+        <input type="text" name="keywords" placeholder="Keywords" ng-model="query" ng-enter='lookup(locationSearch,query,radius)'/>
       </div>
-
-
-
     <search-result></search-result>
   </div>
   <coffice-excerpt class="col-sm-12 col-md-4"></coffice-excerpt>

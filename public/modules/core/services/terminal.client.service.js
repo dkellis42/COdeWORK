@@ -57,21 +57,6 @@ angular.module('core').service('Terminal', [
            var div = document.getElementById('worker-types');
            div.innerHTML += newLabel;
            return 'added ' + workerType + '!';
-         },
- 
-         'strrev': {
-           PS1: 'strrev $',
- 
-           EXIT_HOOK: function() {
-             return 'exit hook dispatch';
-           },
-
-           START_HOOK: function() {
-             return 'start hook dispatch';
-           },
- 
-           DISPATCH: '/strrev'
-           
          }
       };
 
@@ -80,12 +65,10 @@ angular.module('core').service('Terminal', [
       }
 
       $.register_command( 'help', function() {
-        return 'Wterminal' + '<br>' +
+        return 'Co(de)work terminal' + '<br>' +
           'eval - Usage eval &lt;any javascript exression&gt;<br>' +
           'date - Returns Current Date<br>' + 
-          'cap  - Usage cap &lt;string&gt; - Turns the string to upcase<br>' +
           'go - Usage go &lt;url&gt; - Sets the browser location to URL<br>' +
-          'strrev - A Sub-Terminal, Takes any input reverses the string and spits it out<br>' +
           'add - Usage add &lt;string&gt; adds a coworker type to the options'
 
       });

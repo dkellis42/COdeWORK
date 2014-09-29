@@ -43,8 +43,7 @@ module.exports = {
 		},
 		css: [
 			'public/modules/**/css/*.css',
-			'public/stylesheets/bootstrap.css',
-			'public/lib/jquery.terminal.css'
+			'public/stylesheets/bootstrap.css'
 		],
 		js: [
 			'public/config.js',

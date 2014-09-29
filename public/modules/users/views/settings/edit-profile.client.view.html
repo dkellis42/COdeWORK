@@ -7,6 +7,7 @@
 			<li>Quin Adney</li>
 			<li>Derek Ellis</li>
 		</ul>
+		<p><a href="/#!/search">See the rest and search for more <span class="entypo-right-open-mini"></span><span class="entypo-right-open-mini"></span></a></p>
 	</div>
 	<div class="nearby col-sm-12" id="terminal" data-ng-controller="SettingsController" ng-init="terminal.createTerminal()">
 	<p></p>
@@ -41,8 +42,9 @@
 	<div class="question col-sm-12" ng-controller="TimepickerCtrl">
 		<h4>Usual work hours</h4><div class="arrow-right"></div>
 		<div class="col-sm-12">
-			  <timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
-			  <button class="btn btn-danger" ng-click="clear()">Clear</button>
+			  <timepicker class="col-sm-5" ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+			  <div class="col-sm-2"><span>to</span></div>
+			  <timepicker class="col-sm-5" ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
 		</div>
 	</div>
 	<div class="question col-sm-12" data-ng-controller="SettingsController">
