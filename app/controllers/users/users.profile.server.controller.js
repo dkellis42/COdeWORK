@@ -67,6 +67,17 @@ exports.list = function(req, res) {
 	});
 };
 
+exports.read = function(req, res) {
+	User.findOne({
+		_id: req.param('userId')
+	}, function(err, user) {
+		res.jsonp(user);
+	});
+
+	// console.log('blah', user._conditions.profile);
+	// res.user._conditions.profile;
+};
+
 /**
  * Send User
  */

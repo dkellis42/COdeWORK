@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('users').controller('SettingsController', ['$scope', '$http', '$location', 'Users', 'Authentication', 'Terminal',
-	function($scope, $http, $location, Users, Authentication, Terminal) {
+angular.module('users').controller('SettingsController', ['$scope', '$stateParams','$http', '$location', 'Users', 'Authentication', 'Terminal',
+	function($scope, $stateParams, $http, $location, Users, Authentication, Terminal) {
 		$scope.user = Authentication.user;
 		$scope.terminal = Terminal;
 		// If user is not signed in then redirect back home
@@ -16,6 +16,14 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 			return false;
 		};
 
+	    $scope.getUser = function() {
+	    	console.log($stateParams.userId)
+	    	$scope.user = Users.get({
+	    		userId: $stateParams.userId
+	    	}, function(data) {
+		    	$scope.user = data;
+	    	});
+ 		};
 		// Check if provider is already in use with current user
 		$scope.isConnectedSocialAccount = function(provider) {
 			return $scope.user.provider === provider || ($scope.user.additionalProvidersData && $scope.user.additionalProvidersData[provider]);

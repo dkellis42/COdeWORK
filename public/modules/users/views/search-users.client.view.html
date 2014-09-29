@@ -12,12 +12,12 @@
   </div>
   <div class="col-sm-4 user-search-results">
     <div class="keyword-filter">
-      <input type="text" placeholder="filter results by keyword" ng-enter="searchUsers()"/>
+      <input type="text" placeholder="filter results by keyword" ng-model="interests"/>
     </div>
     <ul>
-      <li ng-repeat="user in markers">
+      <li ng-repeat="user in markers | filter: {workingOn: interests}">
         <div class="col-sm-9">
-          <a ng-href="/#!/users/{{user.id}}"><span data-ng-bind="user.name" tooltip="View profile" tooltip-placement="right"></span></a>
+          <a data-ng-href="#!/users/{{user._id}}"><span data-ng-bind="user.name" tooltip="View profile" tooltip-placement="right"></span></a>
         </div>
         <div class="col-sm-3">
           <span class="entypo-mail" tooltip="send a message" tooltip-placement="left" ng-click="open(600)"></span>
