@@ -6,7 +6,10 @@
   </div>
   <div class="col-sm-8">
     <google-map center="map.center" draggable="true" options="{styles:map.styles}" zoom="map.zoom">
-      <markers models="markers" coords="'coords'" idKey="'_id'" isLabel="true" options="'options'">
+      <markers models="markers" coords="'coords'" idKey="'_id'" icon="'icon'" isLabel="true" options="'options'">
+            <windows show="show" idKey="'_id'">
+                <div ng-non-bindable>{{name}}</div>
+            </windows>
       </markers>
     </google-map>
   </div>

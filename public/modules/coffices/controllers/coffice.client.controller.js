@@ -1,22 +1,52 @@
 'use strict';
 
 
-angular.module('coffices').controller('CofficeController', ['$scope', 'distance', 'cofficeLookup', '$http', 'geolocation',
-  function($scope, distance, cofficeLookup, $http, geolocation) {
+angular.module('coffices').controller('CofficeController', ['$scope', 'distance', 'cofficeLookup', '$http', 'geolocation', 'Users', 'Authentication',
+  function($scope, distance, cofficeLookup, $http, geolocation, Users, Authentication) {
+    $scope.user = Authentication.user;
     $scope.clientID = '03YGRUTGE1CNGSV5BZA2JFMUCKZBJEP1YKHPOEGYSRTGU2VG';
     $scope.clientSecret = '15ULA34FN42K3XKHORE4K2CU0Y4CHBHSAIHJ1G01QRPG5Z1H';
     $scope.testCoffices  = {'list':[]};
-    $scope.favoriteCofficeList = [];
     geolocation.getLocation().then(function(data){
       $scope.coords = {lat:data.coords.latitude, long:data.coords.longitude};
     });
-    $scope.favoriteCoffices = function(coffice, inFavorites) {
+    $scope.favoriteCoffices = function(coffice) {
+      var inFavorites = coffice.favorite;
       if(inFavorites){
-        $scope.favoriteCofficeList.push(coffice.venue.id);
+        coffice.favorite = true;
+        console.log('favorited', coffice);
+        $scope.user.favoriteCoffices.push(coffice);
       } else {
-        console.log('nope');
+        coffice.favorite = false;
+        console.log('removed', coffice);
+        coffice = $scope.containsObject(coffice, $scope.user.favoriteCoffices)
+        $scope.user.favoriteCoffices = $scope.user.favoriteCoffices.splice(coffice, 1);
       }
-      console.log('favorites', $scope.favoriteCofficeList);
+      $scope.updateUserProfile(true);
+    };
+    $scope.updateUserProfile = function(isValid) {
+      if (isValid){
+        $scope.success = $scope.error = null;
+        var user = new Users($scope.user);
+        console.log('user',user);
+        user.$update(function(response) {
+          $scope.success = true;
+          Authentication.user = response;
+        }, function(response) {
+          $scope.error = response.data.message;
+        });
+      } else {
+        $scope.submitted = true;
+      }
+    };
+    $scope.containsObject = function (obj, list) {
+        var i;
+        for (i = 0; i < list.length; i++) {
+            if (list[i] === obj) {
+                return {'result':true, 'index': i};
+            }
+        }
+        return {'result':false, 'index': i};
     };
     $scope.initUp = function(near, query, radius) {
       // near = near || "78702";
@@ -26,10 +56,17 @@ angular.module('coffices').controller('CofficeController', ['$scope', 'distance'
           var returnedData = data.response.groups[0].items;
           for(var i in returnedData){
             if (returnedData[i].venue.photos.count > 0 ){
+              var inFavorites = $scope.containsObject(returnedData[i], $scope.user.favoriteCoffices);
+              console.log('in fav', inFavorites);
+              if(inFavorites.result){
+                  returnedData[i].favorite = true;
+                } else {
+                  returnedData[i].favorite = false;
+                }
               $scope.testCoffices.list.push(returnedData[i]);
             }
           }
-           console.log('data',$scope.testCoffices.list);
+          console.log('data', $scope.testCoffices);
            $scope.hoveredCoffice = $scope.testCoffices.list[0];
            $scope.hoverOnCoffice($scope.hoveredCoffice);
       });
@@ -45,11 +82,20 @@ angular.module('coffices').controller('CofficeController', ['$scope', 'distance'
           if (returnedData.length > 0){
             for(var i in returnedData){
               if (returnedData[i].venue.photos.count > 0 ){
+                if($scope.user.favoriteCoffices.indexOf(returnedData[i]) != -1){
+                  returnedData[i].favorite = true;
+                }
                 $scope.testCoffices.list.push(returnedData[i]);
               }
             }
           }
       });
+    };
+    $scope.getFavorites = function(){
+      for(var i in $scope.user.favoriteCoffices){
+        $scope.user.favoriteCoffices[i].favorite = true;
+      }
+      $scope.testCoffices  = {'list':$scope.user.favoriteCoffices};
     };
     $scope.getCofficePhoto = function(coffice, size){
       var cPrefix = coffice.venue.featuredPhotos.items[0].prefix;
@@ -58,9 +104,6 @@ angular.module('coffices').controller('CofficeController', ['$scope', 'distance'
     };
 
     $scope.testme = function () {
-
-      console.log('i work')
-      console.log($scope.locationSearch)
       $scope.lookup($scope.locationSearch)
     };
 

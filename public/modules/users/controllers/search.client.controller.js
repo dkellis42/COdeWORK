@@ -3,17 +3,33 @@
 angular.module('users').controller('SearchController', ['$scope', '$stateParams', 'geolocation', 'Users', 'Authentication', '$modal',
   function($scope, $stateParams, geolocation, Users, Authentication, $modal) {
     $scope.user = Authentication.user;
+        // Update a user profile
+    $scope.updateUserProfile = function(isValid) {
+      if (isValid){
+        $scope.success = $scope.error = null;
+        var user = new Users($scope.user);
+        console.log('user',user);
+        user.$update(function(response) {
+          $scope.success = true;
+          Authentication.user = response;
+        }, function(response) {
+          $scope.error = response.data.message;
+        });
+      } else {
+        $scope.submitted = true;
+      }
+    };
     $scope.markers = [];
     geolocation.getLocation().then(function(data){
       $scope.map.center = {latitude:data.coords.latitude, longitude:data.coords.longitude};
-      $scope.user.location.latitude = data.coords.latitude;
+      $scope.user.location = {latitude:data.coords.latitude, longitude:data.coords.longitude};
+      console.log('stuff', $scope.user.location);
+      $scope.updateUserProfile(true);
     });
 
     $scope.find = function() {
       $scope.users = Users.query();
     };
-    
-
     $scope.map = {
       center: {
           latitude: 60,
@@ -92,7 +108,8 @@ angular.module('users').controller('SearchController', ['$scope', '$stateParams'
               'workingOn': allUsers[i].workingOn, 
               'options': {
                 'labelContent': allUsers[i].displayName
-              }
+              },
+              'icon': 'http://i.picresize.com/images/2014/09/30/Ju5dG.png'
             };
             markers.push(args);
         }
