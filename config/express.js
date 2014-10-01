@@ -145,93 +145,41 @@ module.exports = function(db) {
 		});
 	});
 
-<<<<<<< HEAD
-	io.sockets.on('connection', function(socket) {
-		console.log('user connected')
-		
-		// var Chat = mongoose.model('Message', ChatSchema),
-		// 	query = Chat.find({});
+	var usernames = {};
+	var numUsers = 0;
 
-		// Chat.find().sort('-created').limit(8).exec(function(err, docs){
-		// 	if(err) throw err;
-		// 	socket.emit('load old msgs', docs);
-		// });
-		
-		socket.on('new user', function(data, callback){
-			if (data in users){
-				callback(false);
-			} else{
-				callback(true);
-				socket.nickname = data;
-				users[socket.nickname] = socket;
-				updateNicknames();
-			}
-		});
-		
-		function updateNicknames(){
-			io.sockets.emit('usernames', Object.keys(users));
-		}
-
-		socket.on('send message', function(data, callback){
-			var msg = data.trim();
-			console.log('after trimming message is: ' + msg);
-			if(msg.substr(0,3) === '/w '){
-				msg = msg.substr(3);
-				var ind = msg.indexOf(' ');
-				if(ind !== -1){
-					var name = msg.substring(0, ind);
-					var msg = msg.substring(ind + 1);
-					if(name in users){
-						users[name].emit('whisper', {msg: msg, nick: socket.nickname});
-						console.log('message sent is: ' + msg);
-						console.log('Whisper!');
-					} else{
-						callback('Error!  Enter a valid user.');
-					}
-				} else{
-					callback('Error!  Please enter a message for your whisper.');
-				}
-			} else{
-				var newMsg = new Chat({msg: msg, nick: socket.nickname});
-				newMsg.save(function(err){
-					if(err) throw err;
-					io.sockets.emit('new message', {msg: msg, nick: socket.nickname});
-				});
-			}
-		});
-		
-		socket.on('disconnect', function(data){
-			if(!socket.nickname) return;
-			delete users[socket.nickname];
-			updateNicknames();
-		});
-	       
-	});
-=======
-	var server = http.createServer(app);
-    var io = require('socket.io').listen(server);
+	// io.on('connection', function (socket) {
 
 
-	io.on('connection', function(socket) {
-		console.log('user connected');
-	        socket.on('message', function(from, msg) {
-	        	// console.log('recieved message from', 
-                // from, 'msg', JSON.stringify(msg));
-			    console.log('broadcasting message');
-    		    console.log('payload is', msg);
+	//   console.log('connected');
 
-	            io.sockets.emit('broadcast', {
-	                payload: msg,
-	                source: from
-	            });
-	            console.log('broadcast complete');
-	        });
+	//   socket.on('connectToServer', function (data) {
+	//       var name = data.name;
+	//       io.sockets.emit('user-join', name + " has connected to the group");
+	//   });
 
-	        socket.on('disconnect', function() {
-	        	console.log('user disconnected');
-	        });
-	    });
->>>>>>> 70acb845514798f52ad61fe9fb4eafa755b705e3
-	 
+	//   socket.on('send msg', function (data) {
+	//       io.sockets.emit('get msg', data);
+	//   });
+
+	//   // when the user disconnects.. perform this
+	//   socket.on('disconnect', function () {
+
+	//   	console.log('disconnected');
+	//     // remove the username from global usernames list
+	//     if (addedUser) {
+	//       delete usernames[socket.username];
+	//       --numUsers;
+
+	//       // echo globally that this client has left
+	//       socket.broadcast.emit('user left', {
+	//         username: socket.username,
+	//         numUsers: numUsers
+	//       });
+	//     }
+	//   });
+
+	// });
+
 	return server;
 };
