@@ -15,6 +15,20 @@ angular.module('users').controller('SettingsController', ['$scope', '$stateParam
 
 			return false;
 		};
+    $scope.getTimes = function(begin, end){
+      var now = new Date();
+        now = now.toTimeString();
+      var strBegin = new Date(begin);
+        strBegin = strBegin.toTimeString();
+      var strEnd = new Date(end);
+        strEnd = strEnd.toTimeString();
+        console.log('now',now);
+      if (strBegin < now > strEnd){
+        return true;
+      } else {
+        return false
+      }
+    };
     $scope.stubSkills = [
       'CSS',
       'jQuery',
