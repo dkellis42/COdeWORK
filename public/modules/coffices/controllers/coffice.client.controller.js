@@ -66,11 +66,11 @@ angular.module('coffices').controller('CofficeController', ['$scope', 'distance'
            $scope.hoveredCoffice = $scope.testCoffices.list[0];
            $scope.hoverOnCoffice($scope.hoveredCoffice);
       });
-      
     };
-
     $scope.lookup = function(near, query, radius){ 
-      near = '78702';
+      if (!near){
+        near = '78702';
+      }
       $scope.testCoffices  = {'list':[]};
       var foursquareQuery = $http.get('https://api.foursquare.com/v2/venues/explore?client_id=' + $scope.clientID + '&client_secret=' + $scope.clientSecret + '&venuePhotos=1&v=20140910&near=' + near +'&query=coffee,wifi' + query, {cache: true});
       foursquareQuery.success(function(data, status, headers, config) {
@@ -108,6 +108,10 @@ angular.module('coffices').controller('CofficeController', ['$scope', 'distance'
         latitude: $scope.hoveredCoffice.venue.location.lat,
         longitude: $scope.hoveredCoffice.venue.location.lng
       };
+      $scope.map.marker = {
+        latitude: $scope.hoveredCoffice.venue.location.lat,
+        longitude: $scope.hoveredCoffice.venue.location.lng
+      };
       $scope.details.getHours(coffice, function(data) {
         $scope.hoveredCoffice.hours = data;
       });
@@ -122,6 +126,12 @@ angular.module('coffices').controller('CofficeController', ['$scope', 'distance'
       center: {
           latitude: 60,
           longitude: -90
+      },
+      marker: {
+        center: {
+          latitude: 60,
+          longitude: -90
+        }
       },
       zoom: 8,
       disableDefaultUI: true,
@@ -180,5 +190,8 @@ angular.module('coffices').controller('CofficeController', ['$scope', 'distance'
         }
       ]
     };
+      $scope.$on('$destroy', function() {
+        elm.data('google-map').destroy();
+  });
   }
 ]);

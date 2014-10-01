@@ -7,7 +7,7 @@
         <div class="hex">
           <div class="top avatar"></div>
           <h1 class="margin-top lime">
-            <a class="white" href="{{user.providerData.html_url}}">
+            <a data-tooltip="check out {{user.displayName}}'s github" tooltip-placement="right" class="white" href="{{user.providerData.html_url}}">
               <span class="entypo-github"></span>
             </a>
             <span data-ng-bind="user.displayName"></span>
@@ -15,14 +15,22 @@
           <div class="bottom avatar"></div>
         </div>
     </div>
-		<div class="col-sm-12 margin-top">
+    <div class="hex-row even col-sm-12">
+        <div ng-repeat="skill in user.skills" data-skill="{{skill}}" class="hex"><div class="top"></div><div class="middle"></div><div class="bottom"></div></div>
+    </div>
+		<div class="col-sm-12 col-md-6 margin-top">
       <h3 data-ng-bind="user.email"></h3>
       <h3>I'm currently working on: </h3>
       <span data-ng-bind="user.workingOn"></span>
       <h3>I need some help with:</h3>
       <span data-ng-bind="user.needsHelpWith"></span>
     </div>
-
+    <div class="col-sm-12 col-md-6 margin-top">
+      <h3>Coding goals:</h3>
+      <p ng-repeat="goal in user.goals" data-ng-bind="goal"></p>
+      <h3>Favorite coffices:</h3>
+        <search-result ng-repeat="coffice in user.favoriteCoffices"></search-result>
+    </div>
 	</div>
 
 </section>

@@ -67,7 +67,7 @@
       // WELCOME_MESSAGE
       // Message to be shown when the terminal is first 
       // published
-      WELCOME_MESSAGE    : 'Welcome to Co(de)work editor<br><br>Type <strong>help</strong> to see available commands<br><br>',
+      WELCOME_MESSAGE    : 'Welcome to Co(de)work terminal<br><br>Type <strong>help</strong> to see available commands<br><br>',
 
       // NOT_FOUND
       // Message to be published if the command is not found
@@ -148,8 +148,8 @@
       // required for terminal emulation
       element.addClass( settings.TERMINAL_CLASS ).addClass( settings.DEFAULT_THEME );
       if( settings.WIDTH && settings.HEIGHT ) element.css( { width: settings.WIDTH, height: settings.HEIGHT } )
-      if( user.displayName == '' ){
-        element.html( '' ).append( "<div>Looks like you're new here. To set your name, type 'edit name'.</div>" );
+      if( user.displayName == (null || '') ){
+        element.html( '' ).append( "<div>Looks like you're new here. To set your name, type <stron>edit-name</strong> &lt;string&gt;.</div>" );
       } else {
         element.html( '' ).append( '<div>' + settings.WELCOME_MESSAGE + '</div>' );
       }
@@ -247,7 +247,7 @@
         e.preventDefault();
         e.stopPropagation();
 
-        var value = input.val().toLowerCase();
+        var value = input.val();
 
         if( settings.HISTORY ) {
           if( history.length > settings.HISTORY_ENTRIES ) history.shift();

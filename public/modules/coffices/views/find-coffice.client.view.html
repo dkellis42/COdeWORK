@@ -14,7 +14,7 @@
       <div class="col-sm-12 col-md-3">
         <input type="button" value="Your favorites" ng-click="getFavorites()"/>
       </div>
-    <search-result></search-result>
+    <search-result ng-repeat="coffice in testCoffices.list | unique: 'venue.name' | filter: keywords"></search-result>
   </div>
   <coffice-excerpt class="col-sm-12 col-md-4"></coffice-excerpt>
   

@@ -2,19 +2,6 @@
  
 angular.module('core')
 
-
-	.directive('coolFade', function() {
-	    return {
-	      compile: function(elm) {
-	        //console.log('compiling');
-	        $(elm).css('opacity', 0);
-	        return function(scope, elm, attrs) {
-	         // console.log('animating');
-	          $(elm).animate({ opacity : 1.0 }, 1000 );
-	        };
-	      }
-	    };
-	  })
 	.controller('HomeController', ['$scope', 'Authentication', '$animate',
     	function($scope, Authentication, $animate) {
 
@@ -29,7 +16,6 @@ angular.module('core')
 	            		$scope.signin = true;
 	            	}
 	            };
-
 	         
 	    }  
 	]);

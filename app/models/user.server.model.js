@@ -77,6 +77,12 @@ var UserSchema = new Schema({
 			default: Date.now
 		}
 	},
+	skills: {
+		type: Array
+	},
+	goals: {
+		type: Array
+	},
 	favoriteCoffices: {
 		type: Array
 	},
