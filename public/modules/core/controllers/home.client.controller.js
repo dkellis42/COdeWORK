@@ -18,6 +18,7 @@ angular.module('core')
 	.controller('HomeController', ['$scope', 'Authentication', '$animate', 'socket',
     	function($scope, Authentication, $animate, socket) {
 
+<<<<<<< HEAD
 	        $scope.authentication = Authentication;
 
 	        	var socket = io.connect();
@@ -25,9 +26,21 @@ angular.module('core')
 	            $animate.addClass('.headline div','test-add', function(){
 	            	console.log('arggghhh');
 	            });
+=======
+	        		$scope.authentication = Authentication;
+	        		$scope.user = Authentication.user;
+	            $animate.addClass('.headline div','test-add');
+	            $scope.route = function(){
+	            	if($scope.user){
+	            		document.location.href = '/#!/settings/profile';
+	            	} else {
+	            		$scope.signin = true;
+	            	}
+	            };
+>>>>>>> 70acb845514798f52ad61fe9fb4eafa755b705e3
 	            $scope.messages = [];
-	            $scope.realtimeStatus = "Connecting...";
-	            $scope.channel = "pubnub_chat";
+	            $scope.realtimeStatus = 'Connecting...';
+	            $scope.channel = 'pubnub_chat';
 	            $scope.limit = 20;
 
 	            $scope.publish = function(){
@@ -43,7 +56,7 @@ angular.module('core')
 	                        message : $scope.message
 	                    }) 
 	                     
-	               $scope.message.text = "";
+	               $scope.message.text = '';
 	            }
 	                
 	            $scope.history = function(){

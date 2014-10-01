@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('users').controller('TimepickerCtrl', function ($scope) {
   $scope.mytime = new Date();
 

@@ -15,9 +15,13 @@ angular.module('users').controller('SettingsController', ['$scope', '$stateParam
 
 			return false;
 		};
-
+    $scope.stubSkills = [
+      'CSS',
+      'jQuery',
+      'PHP'
+    ];
 	    $scope.getUser = function() {
-	    	console.log($stateParams.userId)
+	    	console.log($stateParams.userId);
 	    	$scope.user = Users.get({
 	    		userId: $stateParams.userId
 	    	}, function(data) {
@@ -89,32 +93,33 @@ angular.module('users').controller('SettingsController', ['$scope', '$stateParam
 			'conversationalist',
 			'mentor'
 		];
-		$scope.stubHelp = "I'm a little stuck with setting up node, so it would be great if someone experienced with it could help me out.";
 	}
 ])
 
-.directive("clickToEdit", function() {
+.directive('clickToEdit', function() {
     var editorTemplate = '<div class="click-to-edit" ng-enter="save()">' +
         '<div ng-hide="view.editorEnabled">' +
             '{{value}} ' +
             '<a ng-click="enableEditor()">Edit</a>' +
         '</div>' +
         '<div ng-show="view.editorEnabled">' +
-            '<input ng-model="view.editableValue">' +
+            '<textarea class="col-sm-12" type="textarea" ng-model="view.editableValue"></textarea>' +
+            '<p class="col-sm-12">' +
             '<a ng-click="save(); updateUserProfile(true)">Save</a>' +
             ' or ' +
             '<a ng-click="disableEditor()">cancel</a>.' +
+            '</p>' +
         '</div>' +
     '</div>';
 
     return {
-        restrict: "A",
+        restrict: 'A',
         replace: true,
         template: editorTemplate,
         scope: {
-            value: "=clickToEdit",
-            toSave: "@clickToEdit",
-            user: "=user"
+            value: '=clickToEdit',
+            toSave: '@clickToEdit',
+            user: '=user'
         },
         controller: function($scope, Users, Authentication) {
             $scope.view = {
@@ -134,7 +139,6 @@ angular.module('users').controller('SettingsController', ['$scope', '$stateParam
                 $scope.value = $scope.view.editableValue;
                 $scope.toSave = $scope.view.editableValue;
                 $scope.updateUserProfile(true);
-                console.log('click save', $scope.value)
                 $scope.disableEditor();
             };
             $scope.updateUserProfile = function(isValid) {
@@ -159,7 +163,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$stateParam
 .directive('ngEnter', 
   function () {
     return function (scope, element, attrs) {
-        element.bind("keydown keypress", function (event) {
+        element.bind('keydown keypress', function (event) {
             if(event.which === 13) {
                 scope.$apply(function (){
                     scope.$eval(attrs.ngEnter);

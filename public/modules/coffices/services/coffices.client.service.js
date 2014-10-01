@@ -27,8 +27,8 @@ angular.module('coffices')
   ])
   .service('cofficeLookup', ['$http',
     function($http){
-      this.getDetails = function(place, callback){ 
-        var detailQuery = $http.get("https://api.foursquare.com/v2/venues/" + place.venue.id + "?client_id=03YGRUTGE1CNGSV5BZA2JFMUCKZBJEP1YKHPOEGYSRTGU2VG&client_secret=15ULA34FN42K3XKHORE4K2CU0Y4CHBHSAIHJ1G01QRPG5Z1H&v=20140910");
+      this.getDetails = function(place, callback){
+        var detailQuery = $http.get('https://api.foursquare.com/v2/venues/' + place.venue.id + '?client_id=03YGRUTGE1CNGSV5BZA2JFMUCKZBJEP1YKHPOEGYSRTGU2VG&client_secret=15ULA34FN42K3XKHORE4K2CU0Y4CHBHSAIHJ1G01QRPG5Z1H&v=20140910');
         detailQuery.success(function(data, status, headers, config) {
              callback(data.response.venue);
         });
@@ -40,7 +40,7 @@ angular.module('coffices')
         });
       };
       this.getTips = function(place, callback){
-        var detailQuery = $http.get("https://api.foursquare.com/v2/venues/" + place.venue.id + "/tips?client_id=03YGRUTGE1CNGSV5BZA2JFMUCKZBJEP1YKHPOEGYSRTGU2VG&client_secret=15ULA34FN42K3XKHORE4K2CU0Y4CHBHSAIHJ1G01QRPG5Z1H&v=20140910");
+        var detailQuery = $http.get('https://api.foursquare.com/v2/venues/' + place.venue.id + '/tips?client_id=03YGRUTGE1CNGSV5BZA2JFMUCKZBJEP1YKHPOEGYSRTGU2VG&client_secret=15ULA34FN42K3XKHORE4K2CU0Y4CHBHSAIHJ1G01QRPG5Z1H&v=20140910');
         detailQuery.success(function(data, status, headers, config) {
             console.log(data.response);
              callback(data.response.tips);

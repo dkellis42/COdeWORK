@@ -145,6 +145,7 @@ module.exports = function(db) {
 		});
 	});
 
+<<<<<<< HEAD
 	io.sockets.on('connection', function(socket) {
 		console.log('user connected')
 		
@@ -206,6 +207,31 @@ module.exports = function(db) {
 		});
 	       
 	});
+=======
+	var server = http.createServer(app);
+    var io = require('socket.io').listen(server);
+
+
+	io.on('connection', function(socket) {
+		console.log('user connected');
+	        socket.on('message', function(from, msg) {
+	        	// console.log('recieved message from', 
+                // from, 'msg', JSON.stringify(msg));
+			    console.log('broadcasting message');
+    		    console.log('payload is', msg);
+
+	            io.sockets.emit('broadcast', {
+	                payload: msg,
+	                source: from
+	            });
+	            console.log('broadcast complete');
+	        });
+
+	        socket.on('disconnect', function() {
+	        	console.log('user disconnected');
+	        });
+	    });
+>>>>>>> 70acb845514798f52ad61fe9fb4eafa755b705e3
 	 
 	return server;
 };
