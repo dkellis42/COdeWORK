@@ -29,8 +29,8 @@ angular.module('core')
 	            	}
 	            };
 	            $scope.messages = [];
-	            $scope.realtimeStatus = "Connecting...";
-	            $scope.channel = "pubnub_chat";
+	            $scope.realtimeStatus = 'Connecting...';
+	            $scope.channel = 'pubnub_chat';
 	            $scope.limit = 20;
 
 	            $scope.publish = function(){
@@ -46,7 +46,7 @@ angular.module('core')
 	                        message : $scope.message
 	                    }) 
 	                     
-	               $scope.message.text = "";
+	               $scope.message.text = '';
 	            }
 	                
 	            $scope.history = function(){

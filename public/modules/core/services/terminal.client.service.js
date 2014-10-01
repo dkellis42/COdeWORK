@@ -1,22 +1,34 @@
 'use strict';
 
 //Add an interactive terminal-like window
-angular.module('core').service('Terminal', [
+angular.module('core').service('Terminal', [ 'Users', 'Authentication',
 
-  function() {
-
+  function(Users, Authentication) {
+    var theUser = {};
     this.createView = function(){
-      var $view = "<div></div>";
+      var $view = '<div></div>';
       for(var i in commands){
         $view.append('<p>'+commands[i]+'</p>');
       }
     };
-    
+    this.updateUserProfile = function(isValid) {
+      if (isValid){
+        var success, error = null;
+        var user = new Users(theUser);
+        theUser.$update(function(response) {
+          success = true;
+          Authentication.user = response;
+        }, function(response) {
+          error = response.data.message;
+        });
+      }
+    };
     var commands = [ 
       'Edit glimpse',
       'View glimpse'
     ];
     this.createTerminal = function(user) {
+        theUser = user;
         $('#terminal').wterm(user);
     };
     this.command_directory = {
@@ -60,10 +72,8 @@ angular.module('core').service('Terminal', [
          },
          'editname': function(tokens) {
             tokens.shift();
-            var currName = document.getElementById('display-name');
-            currName.value = tokens.join( ' ' );
-            console.log('curr', currName);
-            console.log('tokens', tokens);
+            theUser.displayName = tokens.join( ' ' );
+            this.updateUserProfile(true);
          },
          'myinfo': function(tokens){
             

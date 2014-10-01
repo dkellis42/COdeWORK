@@ -39,55 +39,55 @@ angular.module('users').controller('SearchController', ['$scope', '$stateParams'
       disableDefaultUI: true,
       styles: [
         {
-          featureType: "road",
-          elementType: "geometry.fill",
+          featureType: 'road',
+          elementType: 'geometry.fill',
           stylers: [
-            { color: "#32cd32" }
+            { color: '#32cd32' }
           ]
         },{
-          featureType: "road",
-          elementType: "geometry.stroke",
+          featureType: 'road',
+          elementType: 'geometry.stroke',
           stylers: [
-            { visibility: "off" }
+            { visibility: 'off' }
           ]
         },{
-          "elementType": "labels",
-          "stylers": [
-            { "lightness": -100 },
-            { "saturation": -48 },
-            { "gamma": 9.99 },
-            { "visibility": "simplified" },
-            { "color": "#333333" }
+          'elementType': 'labels',
+          'stylers': [
+            { 'lightness': -100 },
+            { 'saturation': -48 },
+            { 'gamma': 9.99 },
+            { 'visibility': 'simplified' },
+            { 'color': '#333333' }
           ]
         },{
-          "elementType": "labels.icon",
-          "stylers": [
-            { "visibility": "off" }
+          'elementType': 'labels.icon',
+          'stylers': [
+            { 'visibility': 'off' }
           ]
         },{
-          "featureType": "water",
-          "elementType": "geometry",
-          "stylers": [
-            { "visibility": "on" },
-            { "color": "#333333" }
+          'featureType': 'water',
+          'elementType': 'geometry',
+          'stylers': [
+            { 'visibility': 'on' },
+            { 'color': '#333333' }
           ]
         },{
-          "featureType": "poi",
-          "stylers": [
-            { "visibility": "off" }
+          'featureType': 'poi',
+          'stylers': [
+            { 'visibility': 'off' }
           ]
         },{
-          "featureType": "landscape",
-          "elementType": "geometry",
-          "stylers": [
-            { "visibility": "simplified" },
-            { "lightness": -100 }
+          'featureType': 'landscape',
+          'elementType': 'geometry',
+          'stylers': [
+            { 'visibility': 'simplified' },
+            { 'lightness': -100 }
           ]
         },{
-          "featureType": "administrative",
-          "elementType": "geometry.stroke",
-          "stylers": [
-            { "lightness": -100 }
+          'featureType': 'administrative',
+          'elementType': 'geometry.stroke',
+          'stylers': [
+            { 'lightness': -100 }
           ]
         }
       ]
