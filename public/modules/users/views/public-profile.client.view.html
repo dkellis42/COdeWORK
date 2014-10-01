@@ -1,0 +1,10 @@
+<section data-ng-controller="SettingsController" ng-init="getUser()">
+	<div class="page-header">
+		<h1 data-ng-bind="user.displayName"></h1>
+
+		<h1 data-ng-bind="user.email"></h1>
+		<h1 data-ng-bind="user.workingOn"></h1>
+		<h1 data-ng-bind="user.needsHelpWith"></h1>
+		<img src="{{user.providerData.avatar_url}}">
+	</div>
+</section>

@@ -1,21 +1,19 @@
 'use strict';
 
-angular.module('users').controller('SearchController', ['$scope', 'geolocation', 'Users', 'Authentication', '$modal',
-  function($scope, geolocation, Users, Authentication, $modal) {
+angular.module('users').controller('SearchController', ['$scope', '$stateParams', 'geolocation', 'Users', 'Authentication', '$modal',
+  function($scope, $stateParams, geolocation, Users, Authentication, $modal) {
     $scope.user = Authentication.user;
     $scope.markers = [];
     geolocation.getLocation().then(function(data){
       $scope.map.center = {latitude:data.coords.latitude, longitude:data.coords.longitude};
       $scope.user.location.latitude = data.coords.latitude;
-      //And this is where the location updating would happen...IF IT WORKED!  
-        //   user.$update(function(response) {
-        //   $scope.success = true;
-        //   Authentication.user = response;
-        // }, function(response) {
-        //   $scope.error = response.data.message;
-        // });
     });
+
+    $scope.find = function() {
+      $scope.users = Users.query();
+    };
     
+
     $scope.map = {
       center: {
           latitude: 60,
@@ -85,12 +83,12 @@ angular.module('users').controller('SearchController', ['$scope', 'geolocation',
         for (var i in allUsers){
             console.log(i);
             var args = {
-              'name': allUsers[i].displayName, 
+              'name': allUsers[i].displayName,
               'coords': {
                 'latitude': parseFloat(allUsers[i].location.latitude), 
                 'longitude': parseFloat(allUsers[i].location.longitude)
               }, 
-              'idKey': i, 
+              '_id': allUsers[i]._id,
               'workingOn': allUsers[i].workingOn, 
               'options': {
                 'labelContent': allUsers[i].displayName

@@ -1,57 +1,38 @@
-<section class="row" data-ng-controller="SettingsController" ng-init="listUserAccounts()">
+<section class="row">
 <div class="col-sm-12 col-md-6">
-	<div class="nearby col-sm-12">
+	<div class="nearby col-sm-12" data-ng-controller="SettingsController">
 		<h2>Some coders are nearby!</h2>
 		<p><small>Click any name to find out what they're working on.</small></p>
 		<ul class="coders">
-			<li>Quin Adney</li>
-			<li>Derek Ellis</li>
+			<li ng-repeat="aUser in allUsers" data-ng-bind="aUser.displayName"></li>
 		</ul>
+		<p><a href="/#!/search">See the rest and search for more <span class="entypo-right-open-mini"></span><span class="entypo-right-open-mini"></span></a></p>
 	</div>
-	<div class="nearby col-sm-12">
+	<div class="nearby col-sm-12" id="terminal" data-ng-controller="SettingsController" ng-init="terminal.createTerminal(user)">
 	<p></p>
-		<p style="color:lime;">What would you like to do?</p>
-		<p style="color:lime;">> Edit glimpse</p>
-		<p style="color:lime;">> View glimpse</p>
-		<!-- <h2>Your Glimpse</h2>
-		<div class="col-sm-4">
-			<img ng-src="{{user.providerData.avatar_url}}" width="100%" />
-		</div>
-		<div class="col-sm-8">
-			<h3>Name</h3>
-			<p data-ng-bind="user.displayName"></p>
-			<h3>Skills</h3>
-			<p>CSS//Design//SASS//Javascript</p>
-			<h3>Goals</h3>
-			<p>Node mastery</p>
-			<p>Rails sufficiency</p>
-			<p>Completing this project</p>
-			<h3>Favorite Coffice</h3>
-			<p>Mozart's</p>
-		</div>
-	</div> -->
 </div>
-<div class="col-sm-12 col-md-6 question-container" ui-scrollfix>
+<div class="col-sm-12 col-md-6 question-container" ui-scrollfix data-ng-controller="SettingsController">
 	<h2>Your Status</h2>
 	<div class="question col-sm-12">
 		<h4>What are you working on?</h4><div class="arrow-right"></div>
-		<input data-ng-model="user.workingOn" placeholder="{{user.workingOn}}" ng-enter="updateUserProfile(true)">
-		<!-- <div click-to-edit="user.workingOn"></div> -->
+		<div click-to-edit="user.workingOn" user="user"></div>
 	</div>
-	<div class="question col-sm-12">
-		<h4>Code School Progress</h4><div class="arrow-right"></div>
+	<div class="question col-sm-12" ng-controller="TimepickerCtrl">
+		<h4>Usual work hours</h4><div class="arrow-right"></div>
 		<div class="col-sm-12">
-			<img class="col-sm-2" src="modules/coffices/img/coffee.svg"/>
-			<img class="col-sm-2" src="modules/coffices/img/coffee.svg"/>
-			<img class="col-sm-2" src="modules/coffices/img/coffee.svg"/>
+			  <timepicker class="col-sm-4" ng-model="user.timeframe.beginWork" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+			  <div class="col-sm-2"><h2 class="black">to</h2></div>
+			  <timepicker class="col-sm-4" ng-model="user.timeframe.endWork" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+		</div>
+		<div class="col-sm-12">
+			<button class="btn btn-success"><span ng-click="saved=true;updateUserProfile(true)" ng-hide="saved">Save</span><span ng-hide="!saved">Saved!</span></button>
 		</div>
 	</div>
-	<div class="question col-sm-12">
+	<div class="question col-sm-12" data-ng-controller="SettingsController">
 		<h4>Need help with anything?</h4><div class="arrow-right"></div>
-		<input data-ng-model="user.needsHelpWith" placeholder="{{user.needsHelpWith}}" ng-enter="updateUserProfile(true)">
-		
+		<div click-to-edit="user.needsHelpWith" user="user"></div>
 	</div>
-	<div class="question col-sm-12">
+	<div id="worker-types" class="question col-sm-12" data-ng-controller="SettingsController">
 		<h4>What kind of codeworker are you looking for?</h4><div class="arrow-right"></div>
 		<label ng-repeat="type in codeWorkerTypes" for="{{type}}">
 			<input type="checkbox" name="{{type}}" id="{{type}}" value="{{type}}"/>
@@ -65,8 +46,10 @@
 	<div>
 		<ul>
 			<li ng-repeat="user in users">
-				{{user.displayNameoh}}
+				{{user.displayName}}
 			</li>
 		</ul>
 	</div>
+	<input data-ng-model="newName" ng-change="user.displayName=newName;updateUserProfile(true)" id="display-name" ng-show="dontshow"/>
+
 </section>

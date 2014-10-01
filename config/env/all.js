@@ -36,7 +36,8 @@ module.exports = {
 				'http://maps.googleapis.com/maps/api/js?sensor=false',
 				'http://cdn.pubnub.com/pubnub-3.1.min.js',
 				'public/lib/lodash/dist/lodash.min.js',
-				'public/lib/angular-google-maps/dist/angular-google-maps.min.js'
+				'public/lib/angular-google-maps/dist/angular-google-maps.min.js',
+				'public/lib/wterm/wterm.jquery.js'
 
 			]
 		},

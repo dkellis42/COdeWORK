@@ -15,21 +15,24 @@ angular.module('core')
 	      }
 	    };
 	  })
-	
-	.controller('HomeController', ['$scope', 'Authentication',
-    	function($scope, Authentication) {
+	.controller('HomeController', ['$scope', 'Authentication', '$animate',
+    	function($scope, Authentication, $animate) {
 
 	        $scope.authentication = Authentication;
-	        console.log($scope.authentication);
-	            
+	            $animate.addClass('.headline div','test-add', function(){
+	            	console.log('arggghhh');
+	            });
 	            $scope.messages = [];
 	            $scope.realtimeStatus = "Connecting...";
 	            $scope.channel = "pubnub_chat";
 	            $scope.limit = 20;
 
 	            $scope.publish = function(){
+	            	$scope.message.user = Authentication.user.displayName;
+	            	$scope.message.email = Authentication.user.email;
+	            	$scope.message.avatar = Authentication.user.providerData.avatar_url;
+	            	$scope.message.timestamp = Date.now();
 	                
-
 	                $('#progress_bar').slideToggle();
 	                
 	                 PUBNUB.publish({

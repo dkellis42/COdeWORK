@@ -1,13 +1,8 @@
 <div class="chat-modal">
   <div ng-controller="HomeController" class="chat-modal">
-    <div class="progress progress-striped active" id="progress_bar">
-      <div class="bar" style="width: 100%;"></div>
-    </div>
     <div class="well">
     <b>Status: {{realtimeStatus}} </b>
-    <form class="form-horizontal">
-      <label>Name:</label> <input placeholder="Your Name" type="text" name="username" ng-model="message.username"/> <br/>
-      <label>Email:</label> <input placeholder="Your Email" type="text" name="email" ng-model="message.email"/> <br/>             
+    <form class="form-horizontal">             
       <label>Message:</label> <input placeholder="What's on your mind?" type="text" name="text" ng-model="message.text"/> 
       <button type="submit" ng-click="publish()" class="btn btn-primary">Send</button>     
     </form>
@@ -18,10 +13,11 @@
     <div id="messages" class="table-striped">
       <div class="message" ng-repeat="message in messages" cool-fade>
       <div class="avatar-frame">
-      <img ng-src="http://www.gravatar.com/avatar/{{authentication.user.email}}?s=60&r=R&d=https://www.guardly.com/commonassets/images/img_profile_placeholder.png" class="avatar avatar-60 photo" height="60" width="60"/>
+      <img ng-src="{{message.avatar}}" class="avatar avatar-60 photo" height="60" width="60"/>
       </div>
-      <p class="user">{{authentication.user.displayName}} said:</p>
+      <p class="user">{{message.user}} said:</p>
       <p class="text">{{message.text}}</p>
+      <p class="text">@ {{message.timestamp | date:"medium"}}</p>
     </div>
   </div>
 </div>

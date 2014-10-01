@@ -20,7 +20,7 @@ angular.module('coffices')
         return Math.round(km * 0.621371 * 100)/100;
       };
       this.getDistance = function(coffice,near) {
-        var d = this.haversine(coffice.venue.location, {lat: 30.2463, lng:  -97.7609});
+        var d = this.haversine(coffice.venue.location, {lat: near.lat, lng: near.long});
         return this.toMiles(d);
       };
     }

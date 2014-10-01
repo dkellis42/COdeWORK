@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('users').controller('SettingsController', ['$scope', '$http', '$location', 'Users', 'Authentication',
-	function($scope, $http, $location, Users, Authentication) {
+angular.module('users').controller('SettingsController', ['$scope', '$stateParams','$http', '$location', 'Users', 'Authentication', 'Terminal',
+	function($scope, $stateParams, $http, $location, Users, Authentication, Terminal) {
 		$scope.user = Authentication.user;
-
+		$scope.terminal = Terminal;
 		// If user is not signed in then redirect back home
 		if (!$scope.user) $location.path('/');
 
@@ -16,15 +16,23 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 			return false;
 		};
 
+	    $scope.getUser = function() {
+	    	console.log($stateParams.userId)
+	    	$scope.user = Users.get({
+	    		userId: $stateParams.userId
+	    	}, function(data) {
+		    	$scope.user = data;
+	    	});
+ 		};
 		// Check if provider is already in use with current user
 		$scope.isConnectedSocialAccount = function(provider) {
 			return $scope.user.provider === provider || ($scope.user.additionalProvidersData && $scope.user.additionalProvidersData[provider]);
 		};
 
-		$scope.listUserAccounts = function() { 
-			$scope.users = Users.query();
-			console.log($scope.users);
-		};
+		// $scope.listUserAccounts = function() { 
+		// 	$scope.users = Users.query();
+		// 	// console.log(user, $scope.users);
+		// };
 
 		// Remove a user social account
 		$scope.removeUserSocialAccount = function(provider) {
@@ -45,18 +53,23 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 
 		// Update a user profile
 		$scope.updateUserProfile = function(isValid) {
-			$scope.success = $scope.error = null;
-			var user = new Users($scope.user);
-			console.log(user)
-	
-			user.$update(function(response) {
-				$scope.success = true;
-				Authentication.user = response;
-			}, function(response) {
-				$scope.error = response.data.message;
-			});
+			if (isValid){
+				$scope.success = $scope.error = null;
+				var user = new Users($scope.user);
+				console.log('user',user);
+				user.$update(function(response) {
+					$scope.success = true;
+					Authentication.user = response;
+				}, function(response) {
+					$scope.error = response.data.message;
+				});
+			} else {
+				$scope.submitted = true;
+			}
 		};
-
+    Users.query(function(response){
+    	$scope.allUsers = response;
+    });
 		// Change user password
 		$scope.changeUserPassword = function() {
 			$scope.success = $scope.error = null;
@@ -79,15 +92,16 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 		$scope.stubHelp = "I'm a little stuck with setting up node, so it would be great if someone experienced with it could help me out.";
 	}
 ])
+
 .directive("clickToEdit", function() {
-    var editorTemplate = '<div class="click-to-edit">' +
+    var editorTemplate = '<div class="click-to-edit" ng-enter="save()">' +
         '<div ng-hide="view.editorEnabled">' +
             '{{value}} ' +
             '<a ng-click="enableEditor()">Edit</a>' +
         '</div>' +
         '<div ng-show="view.editorEnabled">' +
             '<input ng-model="view.editableValue">' +
-            '<a href="#" ng-click="save(); updateUserProfile(true)">Save</a>' +
+            '<a ng-click="save(); updateUserProfile(true)">Save</a>' +
             ' or ' +
             '<a ng-click="disableEditor()">cancel</a>.' +
         '</div>' +
@@ -99,8 +113,10 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
         template: editorTemplate,
         scope: {
             value: "=clickToEdit",
+            toSave: "@clickToEdit",
+            user: "=user"
         },
-        controller: function($scope) {
+        controller: function($scope, Users, Authentication) {
             $scope.view = {
                 editableValue: $scope.value,
                 editorEnabled: false
@@ -114,15 +130,32 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
             $scope.disableEditor = function() {
                 $scope.view.editorEnabled = false;
             };
-
             $scope.save = function() {
                 $scope.value = $scope.view.editableValue;
-                console.log($scope.value)
+                $scope.toSave = $scope.view.editableValue;
+                $scope.updateUserProfile(true);
+                console.log('click save', $scope.value)
                 $scope.disableEditor();
             };
+            $scope.updateUserProfile = function(isValid) {
+							if (isValid){
+								$scope.success = $scope.error = null;
+								var user = new Users($scope.user);
+								console.log('user',user);
+								user.$update(function(response) {
+									$scope.success = true;
+									Authentication.user = response;
+								}, function(response) {
+									$scope.error = response.data.message;
+								});
+							} else {
+								$scope.submitted = true;
+							}
+						};
         }
     };
 })
+
 .directive('ngEnter', 
   function () {
     return function (scope, element, attrs) {
