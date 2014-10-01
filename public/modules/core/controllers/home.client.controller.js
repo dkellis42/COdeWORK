@@ -15,10 +15,13 @@ angular.module('core')
 	      }
 	    };
 	  })
-	.controller('HomeController', ['$scope', 'Authentication', '$animate',
-    	function($scope, Authentication, $animate) {
+	.controller('HomeController', ['$scope', 'Authentication', '$animate', 'socket',
+    	function($scope, Authentication, $animate, socket) {
 
 	        $scope.authentication = Authentication;
+
+	        	var socket = io.connect();
+
 	            $animate.addClass('.headline div','test-add', function(){
 	            	console.log('arggghhh');
 	            });
