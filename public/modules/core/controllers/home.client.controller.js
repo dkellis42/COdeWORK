@@ -35,10 +35,10 @@ angular.module('core')
 	                 PUBNUB.publish({
 	                        channel : $scope.channel,
 	                        message : $scope.message
-	                    }) 
+	                    }); 
 	                     
 	               $scope.message.text = '';
-	            }
+	            };
 	                
 	            $scope.history = function(){
 	                PUBNUB.history( {
@@ -51,7 +51,7 @@ angular.module('core')
 	                        
 	                    }); 
 	                } );
-	             }
+	             };
 	                 
 
 	           PUBNUB.subscribe({
@@ -89,7 +89,7 @@ angular.module('core')
 	                    });
 	            
 	                }
-	            })
+	            });
 	         
 	    }  
 	]);
