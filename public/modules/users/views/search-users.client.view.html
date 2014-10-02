@@ -6,7 +6,7 @@
   </div>
   <div class="col-sm-8">
     <google-map center="map.center" draggable="true" options="{styles:map.styles}" zoom="map.zoom">
-      <markers models="markers" coords="'coords'" idKey="'_id'" icon="'icon'" isLabel="true" options="'options'">
+      <markers fit="true" models="markers" coords="'coords'" idKey="'_id'" icon="'icon'" isLabel="true" options="'options'">
             <windows show="show" idKey="'_id'">
                 <div ng-non-bindable>{{name}}</div>
             </windows>
@@ -18,7 +18,7 @@
       <input type="text" placeholder="filter results by keyword" ng-model="interests"/>
     </div>
     <ul>
-      <li ng-repeat="user in markers | filter: {workingOn: interests} | filter: {skills: interests}">
+      <li ng-repeat="user in markers | filter: {$:interests}">
         <div class="col-sm-9">
           <a data-ng-href="#!/users/{{user._id}}"><span data-ng-bind="user.name" tooltip="View profile" tooltip-placement="right"></span></a>
         </div>

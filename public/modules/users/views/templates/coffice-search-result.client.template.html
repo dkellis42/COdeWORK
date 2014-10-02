@@ -1,0 +1,14 @@
+<section>
+
+  <div class="search-result col-xs-12 col-sm-4 col-md-4">
+    <div class="overlay">
+      <span ng-click="coffice.favorite=!coffice.favorite;favoriteCoffices(coffice)" ng-class="{'entypo-heart-empty': !coffice.favorite, 'entypo-heart': coffice.favorite}" tooltip="save to favorites" tooltip-placement="right"></span>
+    </div>
+
+    <img ng-src="{{getCofficePhoto(coffice, '300x300')}}"/>
+    <div class="result-info">
+      <h3 data-fittext><span data-ng-bind="coffice.venue.name"></span></h3>
+      <p><span data-ng-bind="distance.getDistance(coffice, coords)"></span> miles away</p>
+    </div>
+  </div>
+</section>

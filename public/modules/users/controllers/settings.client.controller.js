@@ -7,7 +7,6 @@ angular.module('users').controller('SettingsController', ['$scope', '$stateParam
     $scope.alerts = [];
 		// If user is not signed in then redirect back home
 		if (!$scope.user) $location.path('/');
-
 		// Check if there are additional accounts 
 		$scope.hasConnectedAdditionalSocialAccounts = function(provider) {
 			for (var i in $scope.user.additionalProvidersData) {
@@ -33,8 +32,16 @@ angular.module('users').controller('SettingsController', ['$scope', '$stateParam
     if (!$scope.user.workingOn){
       $scope.alerts.push({type:'danger',msg: "Write about what you're currently working on to help you connect with other coders."});
     }
-	    $scope.getUser = function() {
+    if (!$scope.user.needsHelpWith){
+      $scope.alerts.push({type:'danger',msg: "Write about what you need help with, and you might get some."});
+    }
+  $scope.closeAlert = function(index) {
+    $scope.alerts.splice(index, 1);
+  };
+	 $scope.getUser = function() {
 	    	console.log($stateParams.userId);
+        $scope.loggedInUser = $scope.user;
+        console.log('loggedInUser',$scope.loggedInUser)
 	    	$scope.user = Users.users.get({
 	    		userId: $stateParams.userId
 	    	}, function(data) {
@@ -52,6 +59,31 @@ angular.module('users').controller('SettingsController', ['$scope', '$stateParam
 		// };
 
 		// Remove a user social account
+    $scope.getCofficePhoto = function(coffice, size){
+      var cPrefix = coffice.venue.featuredPhotos.items[0].prefix;
+      var cSuffix = coffice.venue.featuredPhotos.items[0].suffix;
+      return cPrefix + size +cSuffix;
+    };
+    $scope.rad = function(x) { return x * Math.PI / 180 };
+    $scope.haversine = function(p1, p2) {
+
+        var R = 6371;
+        var dLat  = $scope.rad(p2.lat - p1.lat);
+        var dLong = $scope.rad(p2.lng - p1.lng);
+
+        var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos($scope.rad(p1.lat)) * Math.cos($scope.rad(p2.lat)) * Math.sin(dLong/2) * Math.sin(dLong/2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        var d = R * c;
+
+        return Math.round(d);
+      };
+      $scope.toMiles = function(km){
+        return Math.round(km * 0.621371 * 100)/100;
+      };
+      $scope.getDistance = function(coffice,near) {
+        var d = $scope.haversine(coffice.venue.location, {lat: near.latitude, lng: near.longitude});
+        return $scope.toMiles(d);
+      };
 		$scope.removeUserSocialAccount = function(provider) {
 			$scope.success = $scope.error = null;
 

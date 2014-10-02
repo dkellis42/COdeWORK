@@ -15,7 +15,7 @@
 </div>
 <div class="col-sm-12 col-md-6 question-container" ui-scrollfix data-ng-controller="SettingsController">
 	<h2>Your Status</h2>
-	<alert ng-repeat="alert in alerts" type="{{alert.type}}" >{{alert.msg}}</alert>
+	<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
 	<div class="question col-sm-12">
 		<h4>What are you working on?</h4><div class="arrow-right"></div>
 		<div click-to-edit="user.workingOn" user="user"></div>

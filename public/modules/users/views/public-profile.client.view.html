@@ -24,12 +24,24 @@
       <span data-ng-bind="user.workingOn"></span>
       <h3 ng-show="user.needsHelpWith">I need some help with:</h3>
       <span data-ng-bind="user.needsHelpWith"></span>
-    </div>
-    <div class="col-sm-12 col-md-6 margin-top">
       <h3 ng-show="user.goals">Coding goals:</h3>
       <p ng-repeat="goal in user.goals" data-ng-bind="goal"></p>
-      <h3>Favorite coffices:</h3>
-        <search-result></search-result>
+    </div>
+    <div class="col-sm-12 col-md-6 margin-top">
+      <h3 ng-show="user.favoriteCoffices">Favorite Coffices:</h3>
+      <section ng-repeat="coffice in user.favoriteCoffices">
+        <div class="search-result col-xs-12 col-sm-4 col-md-4">
+          <div class="overlay">
+            <span ng-click="coffice.favorite=!coffice.favorite" ng-class="{'entypo-heart-empty': !coffice.favorite, 'entypo-heart': coffice.favorite}" data-tooltip="{{coffice.venue.contact.twitter}}" tooltip-placement="right"></span>
+          </div>
+
+          <img ng-src="{{getCofficePhoto(coffice, '300x300')}}"/>
+          <div class="result-info">
+            <h3 data-fittext><span data-ng-bind="coffice.venue.name"></span></h3>
+            <p><span data-ng-bind="getDistance(coffice, loggedInUser.location)"></span> miles away</p>
+          </div>
+        </div>
+      </section>
     </div>
 	</div>
 
