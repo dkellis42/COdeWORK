@@ -4,39 +4,12 @@ angular.module('users').controller('SearchController', ['$scope', '$stateParams'
   function($scope, $stateParams, geolocation, Users, Authentication, $modal, socket) {
     $scope.user = Authentication.user;
 
-    var socket = io.connect();
-
-
-    $scope.msgs = ['hello', 'whats up?'];
-
-    $scope.sendMsg = function () {
-        socket.emit('send msg', $scope.msg);
-
-    }
-
-      // Socket listeners
-      // ===============
-    socket.emit('add user', $scope.user);
-
-
-    socket.on('get msg', function (data){
-        $scope.msgs.push(data);
-    });
-
-    var name = $scope.user.displayName;
-
-    socket.emit('connectToServer', {name: name});
-
-    socket.on('user-join', function (data) {
-        $scope.msgs.push(data);
-    });
-
         // Update a user profile
     $scope.updateUserProfile = function(isValid) {
       if (isValid){
         $scope.success = $scope.error = null;
         var user = new Users($scope.user);
-        console.log('user',user);
+
         user.$update(function(response) {
           $scope.success = true;
           Authentication.user = response;
@@ -51,13 +24,14 @@ angular.module('users').controller('SearchController', ['$scope', '$stateParams'
     geolocation.getLocation().then(function(data){
       $scope.map.center = {latitude:data.coords.latitude, longitude:data.coords.longitude};
       $scope.user.location = {latitude:data.coords.latitude, longitude:data.coords.longitude};
-      console.log('stuff', $scope.user.location);
+
       $scope.updateUserProfile(true);
     });
 
     $scope.find = function() {
       $scope.users = Users.query();
     };
+
     $scope.map = {
       center: {
           latitude: 60,
@@ -125,7 +99,7 @@ angular.module('users').controller('SearchController', ['$scope', '$stateParams'
         var size = response.length;
         var allUsers = response.slice(0,size);
         for (var i in allUsers){
-            console.log(i);
+
             var args = {
               'name': allUsers[i].displayName,
               'coords': {
@@ -142,8 +116,7 @@ angular.module('users').controller('SearchController', ['$scope', '$stateParams'
             markers.push(args);
         }
       $scope.markers = markers;
-      console.log('markers', $scope.markers);
-      console.log('users', allUsers);
+
     });
     $scope.open = function (size) {
 

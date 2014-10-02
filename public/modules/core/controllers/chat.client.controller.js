@@ -60,7 +60,7 @@ angular.module('core')
 
 	           PUBNUB.subscribe({
 	                channel    : $scope.channel,
-	                restore    : false, 
+	                restore    : true, 
 	            
 	                callback   : function(message) { 
 	                    
@@ -81,6 +81,8 @@ angular.module('core')
 	                reconnect  : function() {   
 	                    $scope.$apply(function(){
 	                        $scope.realtimeStatus = 'Connected';
+		                    $('#progress_bar').slideToggle();
+		                    $scope.history();
 	                    });
 	                },
 	            
