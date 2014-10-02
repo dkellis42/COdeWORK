@@ -4,7 +4,7 @@ angular.module('users').controller('TimepickerCtrl', function ($scope) {
   $scope.mytime = new Date();
 
   $scope.hstep = 1;
-  $scope.mstep = 15;
+  $scope.mstep = 1;
 
   $scope.options = {
     hstep: [1, 2, 3],

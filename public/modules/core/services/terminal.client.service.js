@@ -14,7 +14,7 @@ angular.module('core').service('Terminal', [ 'Users', 'Authentication', '$http',
     var updateUserProfile = function(isValid) {
       if (isValid){
         var success, error = null;
-        var user = new Users(theUser);
+        var user = new Users.user(theUser);
         console.log(user);
         user.$update(function(response) {
           success = true;
