@@ -86,6 +86,9 @@ var UserSchema = new Schema({
 	favoriteCoffices: {
 		type: Array
 	},
+	coworkerTypes: {
+		type: Array
+	},
 	username: {
 		type: String,
 		unique: 'testing error message',
