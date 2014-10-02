@@ -36,7 +36,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$stateParam
     ];
 	    $scope.getUser = function() {
 	    	console.log($stateParams.userId);
-	    	$scope.user = Users.get({
+	    	$scope.user = Users.users.get({
 	    		userId: $stateParams.userId
 	    	}, function(data) {
 		    	$scope.user = data;
@@ -85,7 +85,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$stateParam
 				$scope.submitted = true;
 			}
 		};
-    Users.query(function(response){
+    Users.user.query(function(response){
     	$scope.allUsers = response;
     });
 		// Change user password
@@ -160,7 +160,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$stateParam
 								$scope.success = $scope.error = null;
 								var user = new Users($scope.user);
 								console.log('user',user);
-								user.$update(function(response) {
+								users.user.$update(function(response) {
 									$scope.success = true;
 									Authentication.user = response;
 								}, function(response) {

@@ -8,7 +8,7 @@ angular.module('users').controller('SearchController', ['$scope', '$stateParams'
     $scope.updateUserProfile = function(isValid) {
       if (isValid){
         $scope.success = $scope.error = null;
-        var user = new Users($scope.user);
+        var user = new Users.user($scope.user);
 
         user.$update(function(response) {
           $scope.success = true;
@@ -29,7 +29,7 @@ angular.module('users').controller('SearchController', ['$scope', '$stateParams'
     });
 
     $scope.find = function() {
-      $scope.users = Users.query();
+      $scope.users = Users.user.query();
     };
 
     $scope.map = {
@@ -95,7 +95,7 @@ angular.module('users').controller('SearchController', ['$scope', '$stateParams'
       ]
     };
     var markers = [];
-    Users.query(function(response){
+    Users.user.query(function(response){
         var size = response.length;
         var allUsers = response.slice(0,size);
         for (var i in allUsers){
