@@ -1,23 +1,24 @@
 <div class="chat-modal">
-  <div ng-controller="HomeController" class="chat-modal">
+  <div ng-controller="ChatController" class="chat-modal">
     <div class="well">
-    <b>Status: {{realtimeStatus}} </b>
-    <form class="form-horizontal">             
-      <label>Message:</label> <input placeholder="What's on your mind?" type="text" name="text" ng-model="message.text"/> 
-      <button type="submit" ng-click="publish()" class="btn btn-primary">Send</button>     
-    </form>
-    <hr/>
-          
-          
-  <!-- Message List -->
-    <div id="messages" class="table-striped">
-      <div class="message" ng-repeat="message in messages" cool-fade>
-      <div class="avatar-frame">
-      <img ng-src="{{message.avatar}}" class="avatar avatar-60 photo" height="60" width="60"/>
+      <b>Status: {{realtimeStatus}} </b>
+      <form class="form-horizontal">             
+        <label>Message:</label> <input placeholder="What's on your mind?" type="text" name="text" ng-model="message.text"/> 
+        <button type="submit" ng-click="publish()" class="btn btn-primary">Send</button>     
+      </form>
+      <hr/>
+
+      <div id="messages" class="table-striped">
+        <div class="message" ng-repeat="message in messages" cool-fade>
+
+          <div class="avatar-frame">
+            <img ng-src="{{message.avatar}}" class="avatar avatar-60 photo" height="60" width="60"/>
+          </div>
+          <p class="user">{{message.user}} said:</p>
+          <p class="text">{{message.text}}</p>
+          <p class="text">@ {{message.timestamp | date:"medium"}}</p>
+        </div>
       </div>
-      <p class="user">{{message.user}} said:</p>
-      <p class="text">{{message.text}}</p>
-      <p class="text">@ {{message.timestamp | date:"medium"}}</p>
     </div>
   </div>
 </div>

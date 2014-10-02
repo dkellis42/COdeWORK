@@ -2,8 +2,32 @@
  
 angular.module('core')
 
-	.controller('HomeController', ['$scope', 'Authentication', '$animate',
+
+	.directive('coolFade', function() {
+	    return {
+	      compile: function(elm) {
+	        //console.log('compiling');
+	        $(elm).css('opacity', 0);
+	        return function(scope, elm, attrs) {
+	         // console.log('animating');
+	          $(elm).animate({ opacity : 1.0 }, 1000 );
+	        };
+	      }
+	    };
+	  })
+	.controller('ChatController', ['$scope', 'Authentication', '$animate',
     	function($scope, Authentication, $animate) {
+
+	      		$scope.authentication = Authentication;
+    			console.log($scope.authentication);
+	      		$scope.user = Authentication.user;
+	            $animate.addClass('.headline div','test-add');
+
+	            $scope.messages = [];
+	            $scope.realtimeStatus = 'Connecting...';
+	            $scope.channel = 'pubnub_chat';
+	            $scope.limit = 20;
+
 	            $scope.publish = function(){
 	            	$scope.message.user = Authentication.user.displayName;
 	            	$scope.message.email = Authentication.user.email;
@@ -15,10 +39,10 @@ angular.module('core')
 	                 PUBNUB.publish({
 	                        channel : $scope.channel,
 	                        message : $scope.message
-	                    }); 
+	                    }) 
 	                     
 	               $scope.message.text = '';
-	            };
+	            }
 	                
 	            $scope.history = function(){
 	                PUBNUB.history( {
@@ -31,7 +55,7 @@ angular.module('core')
 	                        
 	                    }); 
 	                } );
-	             };
+	             }
 	                 
 
 	           PUBNUB.subscribe({
@@ -57,7 +81,8 @@ angular.module('core')
 	                reconnect  : function() {   
 	                    $scope.$apply(function(){
 	                        $scope.realtimeStatus = 'Connected';
-	                        $scope.history();
+		                    $('#progress_bar').slideToggle();
+		                    $scope.history();
 	                    });
 	                },
 	            
@@ -70,16 +95,7 @@ angular.module('core')
 	                    });
 	            
 	                }
-	            });
-	      		$scope.authentication = Authentication;
-	      		$scope.user = Authentication.user;
-	            $scope.route = function(){
-	            	if($scope.user){
-	            		document.location.href = '/#!/settings/profile';
-	            	} else {
-	            		$scope.signin = true;
-	            	}
-	            };
+	            })
 	         
 	    }  
 	]);

@@ -23,7 +23,11 @@ var express = require('express'),
 
 module.exports = function(db) {
 	// Initialize express app
-	var app = express();
+	var app = express(),
+	    server = http.createServer(app),
+        io = require('socket.io').listen(server),
+
+	    users = {};
 
 	// Globbing model files
 	config.getGlobbedFiles('./app/models/**/*.js').forEach(function(modelPath) {
@@ -141,29 +145,7 @@ module.exports = function(db) {
 		});
 	});
 
-	var server = http.createServer(app);
-    var io = require('socket.io').listen(server);
-
-
-	io.on('connection', function(socket) {
-		console.log('user connected')
-	        socket.on('message', function(from, msg) {
-	        	// console.log('recieved message from', 
-                // from, 'msg', JSON.stringify(msg));
-			    console.log('broadcasting message');
-    		    console.log('payload is', msg);
-
-	            io.sockets.emit('broadcast', {
-	                payload: msg,
-	                source: from
-	            });
-	            console.log('broadcast complete');
-	        });
-
-	        socket.on('disconnect', function() {
-	        	console.log('user disconnected');
-	        });
-	    });
-	 
+	var usernames = {};
+	var numUsers = 0;
 	return server;
 };

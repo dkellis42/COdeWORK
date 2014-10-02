@@ -46,7 +46,7 @@ exports.read = function(req, res) {
 exports.update = function(req, res) {
 	var review = req.review;
 
-	console.log(review.status)
+	console.log(review.status);
 
 	review = _.extend(review, req.body);
 
@@ -109,7 +109,7 @@ exports.reviewByID = function(req, res, next, id) {
  * review authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
-	if (req.user.roles[0] == "admin") {
+	if (req.user.roles[0] === 'admin') {
 		return next();
 	}
 
