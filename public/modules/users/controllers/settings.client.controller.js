@@ -19,6 +19,16 @@ angular.module('users').controller('SettingsController', ['$scope', '$modal','ge
 
       $scope.updateUserProfile(true);
     });
+    $scope.addType = function(type){
+      var typeIndex = $scope.user.coworkerTypes.indexOf(type);
+      if (typeIndex  < 0){
+        $scope.user.coworkerTypes.push(type);
+        $scope.updateUserProfile(true);
+      } else {
+        $scope.user.coworkerTypes.splice(typeIndex, 1);
+        $scope.updateUserProfile(true);
+      }
+    };
     $scope.getTimes = function(begin, end){
       var now = new Date();
         now = now.toTimeString();

@@ -53,8 +53,8 @@
 	<div id="worker-types" class="question col-sm-12" data-ng-controller="SettingsController">
 		<h4>What kind of codeworker are you looking for?</h4><div class="arrow-right"></div>
 		<div class="col-sm-12">
-			<label ng-repeat="type in codeWorkerTypes" for="{{type}}">
-				<input type="checkbox" name="{{type}}" id="{{type}}" value="{{type}}"/>
+			<label ng-click="addType(type);in" ng-repeat="type in codeWorkerTypes" for="{{type}}">
+				<input ng-checked="{user.coworkerTypes.indexOf(type)>-1}" type="checkbox" name="{{type}}" id="{{type}}" value="{{type}}"/>
 				<p>{{type}}</p>
 			</label>
 		</div>

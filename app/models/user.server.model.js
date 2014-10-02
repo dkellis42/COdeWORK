@@ -30,6 +30,9 @@ var UserSchema = new Schema({
 		default: '',
 		validate: [validateLocalStrategyProperty, 'Please fill in your first name']
 	},
+	coworkerTypes: {
+		type: Array
+	},
 	lastName: {
 		type: String,
 		trim: true,
