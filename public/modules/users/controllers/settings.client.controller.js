@@ -4,6 +4,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$stateParam
 	function($scope, $stateParams, $http, $location, Users, Authentication, Terminal) {
 		$scope.user = Authentication.user;
 		$scope.terminal = Terminal;
+    $scope.alerts = [];
 		// If user is not signed in then redirect back home
 		if (!$scope.user) $location.path('/');
 
@@ -29,11 +30,9 @@ angular.module('users').controller('SettingsController', ['$scope', '$stateParam
         return false;
       }
     };
-    $scope.stubSkills = [
-      'CSS',
-      'jQuery',
-      'PHP'
-    ];
+    if (!$scope.user.workingOn){
+      $scope.alerts.push({type:'danger',msg: "Write about what you're currently working on to help you connect with other coders."});
+    }
 	    $scope.getUser = function() {
 	    	console.log($stateParams.userId);
 	    	$scope.user = Users.users.get({
@@ -73,7 +72,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$stateParam
 		$scope.updateUserProfile = function(isValid) {
 			if (isValid){
 				$scope.success = $scope.error = null;
-				var user = new Users($scope.user);
+				var user = new Users.user($scope.user);
 				console.log('user',user);
 				user.$update(function(response) {
 					$scope.success = true;
@@ -100,6 +99,8 @@ angular.module('users').controller('SettingsController', ['$scope', '$stateParam
 				$scope.error = response.message;
 			});
 		};
+
+
 		$scope.codeWorkerTypes = [
 			'study buddy',
 			'collaborator',
@@ -158,9 +159,9 @@ angular.module('users').controller('SettingsController', ['$scope', '$stateParam
             $scope.updateUserProfile = function(isValid) {
 							if (isValid){
 								$scope.success = $scope.error = null;
-								var user = new Users($scope.user);
+								var user = new Users.user($scope.user);
 								console.log('user',user);
-								users.user.$update(function(response) {
+								user.$update(function(response) {
 									$scope.success = true;
 									Authentication.user = response;
 								}, function(response) {
