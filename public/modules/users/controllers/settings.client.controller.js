@@ -23,12 +23,22 @@ angular.module('users').controller('SettingsController', ['$scope', '$stateParam
       var strEnd = new Date(end);
         strEnd = strEnd.toTimeString();
         console.log('now',now);
-      if ((strBegin < now) && (strEnd > now)){
-        return true;
-      } else {
-        return false;
+
+      if (now > strBegin) {
+      	if (strEnd > now) {
+      		return true;
+      	} else {
+      		return false
+      	}
       }
+      else if ((now < strBegin) && (strEnd > now)) {
+      	return true;
+      } else {
+      	return false;
+      };
+
     };
+
     $scope.stubSkills = [
       'CSS',
       'jQuery',
