@@ -18,7 +18,7 @@
       <input type="text" placeholder="filter results by keyword" ng-model="interests"/>
     </div>
     <ul>
-      <li ng-repeat="user in markers | filter: {$:interests}">
+      <li ng-repeat="user in markers | filter: {$:interests}" data-ng-hide="selfie._id == user._id">
         <div class="col-sm-9">
           <a data-ng-href="#!/users/{{user._id}}"><span data-ng-bind="user.name" tooltip="View profile" tooltip-placement="right"></span></a>
         </div>

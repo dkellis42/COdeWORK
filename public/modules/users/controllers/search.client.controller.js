@@ -3,6 +3,7 @@
 angular.module('users').controller('SearchController', ['$scope', '$stateParams', 'geolocation', 'Users', 'Authentication', '$modal', 'socket',
   function($scope, $stateParams, geolocation, Users, Authentication, $modal, socket) {
     $scope.user = Authentication.user;
+    $scope.selfie = Authentication.user;
 
         // Update a user profile
     $scope.updateUserProfile = function(isValid) {
