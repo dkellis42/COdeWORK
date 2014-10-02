@@ -4,7 +4,7 @@
 		<h2>Some coders are nearby!</h2>
 		<p><small>Click any name to find out what they're working on.</small></p>
 		<ul class="coders col-sm-12 no-padding">
-			<li data-tooltip="{{aUser.displayName}}" data-username="{{aUser.displayName}}" ng-class="{'show-name': showName,'online': getTimes(aUser.timeframe.beginWork, aUser.timeframe.endWork)}" class="col-sm-3 col-xs-12" ng-repeat="aUser in allUsers">
+			<li data-tooltip="{{aUser.displayName}}" data-username="{{aUser.displayName}}" ng-class="{'show-name': showName,'online': getTimes(aUser.timeframe.beginWork, aUser.timeframe.endWork)}" class="col-sm-3 col-xs-12" ng-repeat="aUser in allUsers" data-ng-hide="aUser._id == user._id">
 				<a data-ng-href="#!/users/{{aUser._id}}"><img width="100%" ng-src="{{aUser.providerData.avatar_url}}" /></a>
 			</li>
 		</ul>
