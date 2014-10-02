@@ -24,9 +24,6 @@ angular.module('users').controller('SearchController', ['$scope', '$stateParams'
     $scope.markers = [];
     geolocation.getLocation().then(function(data){
       $scope.map.center = {latitude:data.coords.latitude, longitude:data.coords.longitude};
-      $scope.user.location = {latitude:data.coords.latitude, longitude:data.coords.longitude};
-
-      $scope.updateUserProfile(true);
     });
 
     $scope.find = function() {

@@ -14,7 +14,7 @@
           </h1>
           <div class="bottom avatar"></div>
         </div>
-        <div class="hex" ng-show="getTimes(aUser.timeframe.beginWork, aUser.timeframe.endWork)}">
+        <div class="hex" ng-show="getTimes(aUser.timeframe.beginWork, aUser.timeframe.endWork)">
           <div class="top avatar"></div>
           <h4 class="lime">Coding now!</h4>
           <div class="bottom avatar"></div>
@@ -36,7 +36,7 @@
       <h3 ng-show="user.timeframe">Usual work hours:</h3>
       <p><span data-ng-bind="user.timeframe.beginWork | date:'shortTime'"></span> to <span data-ng-bind="user.timeframe.endWork | date:'shortTime'"></span></p>
       <h3 ng-show="user.favoriteCoffices">Favorite Coffices:</h3>
-      <section ng-repeat="coffice in user.favoriteCoffices">
+      <section ng-repeat="coffice in user.favoriteCoffices" ng-click="hoverOnCoffice(coffice);open(600)">
         <div class="search-result col-xs-12 col-sm-4 col-md-4">
           <div class="overlay">
             <span ng-click="coffice.favorite=!coffice.favorite" ng-class="{'entypo-heart-empty': !coffice.favorite, 'entypo-heart': coffice.favorite}" data-tooltip="{{coffice.venue.contact.twitter}}" tooltip-placement="right"></span>
@@ -51,5 +51,4 @@
       </section>
     </div>
 	</div>
-
 </section>

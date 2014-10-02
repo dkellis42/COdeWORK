@@ -135,7 +135,7 @@ angular.module('coffices').controller('CofficeController', ['$scope', 'distance'
           longitude: -90
         }
       },
-      zoom: 8,
+      zoom: 13,
       disableDefaultUI: true,
       styles: [
         {

@@ -4,6 +4,7 @@
     <div class="col-sm-3">
       <img src="modules/coffices/img/coffee.svg"/>
     </div>
+    <p class="col-sm-12"></p>
     <p class="col-sm-3">Location: </p>
     <p class="col-sm-9">
       {{hoveredCoffice.venue.location.formattedAddress[0]}}<br/>
@@ -12,21 +13,21 @@
     <p class="col-sm-12">Phone: 
       <span data-ng-bind="hoveredCoffice.venue.contact.formattedPhone"></span>
     </p>
-    <p class="col-sm-12">Hours: </p>
-    <div class="col-sm-12 hours-details">
+    <p class="col-sm-12" ng-show="hoveredCoffice.hours.timeframes">Hours: </p>
+    <div ng-show="hoveredCoffice.hours.timeframes" class="col-sm-12 hours-details">
       <p class="col-sm-10 col-sm-offset-1" ng-repeat="timeframe in hoveredCoffice.hours.timeframes">
         <span data-ng-bind="timeframe.days"></span>: <span data-ng-bind="timeframe.open[0].renderedTime"></span>
       </p>
     </div>
     <div class="col-sm-12">
-      <p><a href="#" ng-click="reviews=true">Read Reviews (<span data-ng-bind="hoveredCoffice.tips.count"></span>)</a></p>
+      <p ng-show="hoveredCoffice.tips.count"><a href="#" ng-click="reviews=true">Read Reviews (<span data-ng-bind="hoveredCoffice.tips.count"></span>)</a></p>
       <p class="social col-sm-12">
         <a ng-show="hoveredCoffice.venue.contact.twitter" ng-href="http://www.twitter.com/{{hoveredCoffice.venue.contact.twitter}}"><span class="entypo-twitter"></span></a>
         <a ng-show="hoveredCoffice.venue.contact.facebook" ng-href="http://www.facebook.com/{{hoveredCoffice.venue.contact.facebook}}"><span class="entypo-facebook"></span></a>
         <a ng-show="hoveredCoffice.venue.url" ng-href="{{hoveredCoffice.venue.url}}"><span class="entypo-monitor"></span></a>
       </p>
     </div>
-      <google-map class="col-sm-12" center="map.center" draggable="true" options="{styles:map.styles}" zoom="map.zoom">
+      <google-map ng-show="map" class="col-sm-12" center="map.center" draggable="true" options="{styles:map.styles}" zoom="map.zoom">
         <marker idKey="coffice-location" coords="map.marker"></marker>
       </google-map>
   </div>

@@ -10,6 +10,12 @@
 		</ul>
 		<h5><a href="/#!/search">See the rest and search for more &nbsp;<span class="entypo-right-bold"></span></a></h5>
 	</div>
+	<div class="col-sm-12" ng-show="user.skills.length<1 || user.goals.length<1">
+		<alert type="danger" close="closeAlert($index)">
+				<p ng-show="user.skills.length<1">Use the terminal below to add your skills to your profile.</p>
+				<p ng-show="user.goals.length<1">Use the terminal below to add coding goals to your profile.</p>
+		</alert>
+	</div>
 	<div class="nearby col-sm-12" id="terminal" data-ng-controller="SettingsController" ng-init="terminal.createTerminal(user)">
 	<p></p>
 </div>
@@ -52,9 +58,6 @@
 				<p>{{type}}</p>
 			</label>
 		</div>
-	</div>
-	<div data-ng-show="success" class="text-center text-success">
-		<strong>Profile Saved Successfully</strong>
 	</div>
 </div>
 	<div>

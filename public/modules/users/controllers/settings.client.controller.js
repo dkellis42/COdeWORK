@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('users').controller('SettingsController', ['$scope', '$stateParams','$http', '$location', 'Users', 'Authentication', 'Terminal',
-	function($scope, $stateParams, $http, $location, Users, Authentication, Terminal) {
+angular.module('users').controller('SettingsController', ['$scope', '$modal','geolocation','$stateParams','$http', '$location', 'Users', 'Authentication', 'Terminal',
+	function($scope, $modal, geolocation, $stateParams, $http, $location, Users, Authentication, Terminal) {
 		$scope.user = Authentication.user;
 		$scope.terminal = Terminal;
 		// If user is not signed in then redirect back home
@@ -14,6 +14,11 @@ angular.module('users').controller('SettingsController', ['$scope', '$stateParam
 
 			return false;
 		};
+    geolocation.getLocation().then(function(data){
+      $scope.user.location = {latitude:data.coords.latitude, longitude:data.coords.longitude};
+
+      $scope.updateUserProfile(true);
+    });
     $scope.getTimes = function(begin, end){
       var now = new Date();
         now = now.toTimeString();
@@ -107,16 +112,15 @@ angular.module('users').controller('SettingsController', ['$scope', '$stateParam
 			if (isValid){
 				$scope.success = $scope.error = null;
 				var user = new Users.user($scope.user);
-				console.log('user',user);
 				user.$update(function(response) {
 					$scope.success = true;
 					Authentication.user = response;
 				}, function(response) {
 					$scope.error = response.data.message;
 				});
-			} else {
-				$scope.submitted = true;
-			}
+			}// else {
+			// 	$scope.submitted = true;
+			// }
 		};
     Users.user.query(function(response){
     	$scope.allUsers = response;
@@ -127,13 +131,29 @@ angular.module('users').controller('SettingsController', ['$scope', '$stateParam
 
 			$http.post('/users/password', $scope.passwordDetails).success(function(response) {
 				// If successful show success message and clear form
-				$scope.success = true;
+				//$scope.success = true;
 				$scope.passwordDetails = null;
 			}).error(function(response) {
 				$scope.error = response.message;
 			});
 		};
-
+    $scope.hoverOnCoffice = function(coffice){
+      $scope.hoveredCoffice = coffice;
+      console.log(coffice);
+    };
+    $scope.hoveredCoffice = $scope.user.favoriteCoffices[0];
+    $scope.open = function (size) {
+      var modalInstance = $modal.open({
+        templateUrl: 'modules/coffices/views/templates/coffice-excerpt.client.template.html',
+        controller: 'SettingsInstanceController',
+        size: size,
+        resolve: {
+          hoveredCoffice: function() {
+            return $scope.hoveredCoffice;
+          }
+        }
+      });
+    };
 
 		$scope.codeWorkerTypes = [
 			'study buddy',
@@ -144,7 +164,10 @@ angular.module('users').controller('SettingsController', ['$scope', '$stateParam
 		];
 	}
 ])
-
+.controller('SettingsInstanceController',['$scope','hoveredCoffice',
+  function($scope,hoveredCoffice){
+    $scope.hoveredCoffice = hoveredCoffice;
+  }])
 .directive('clickToEdit', function() {
     var editorTemplate = '<div class="click-to-edit" ng-enter="save()">' +
         '<div ng-hide="view.editorEnabled">' +

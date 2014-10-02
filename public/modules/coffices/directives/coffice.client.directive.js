@@ -6,7 +6,6 @@ angular.module('coffices')
     function () {
       return {
         templateUrl: 'modules/coffices/views/templates/coffice-excerpt.client.template.html',
-        controller: 'CofficeController',
         restrict: 'E'
       };
   })

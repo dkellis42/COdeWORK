@@ -70,6 +70,9 @@ angular.module('core').service('Terminal', [ 'Users', 'Authentication', '$http',
            var url = tokens[1];
            document.location.href = url;
          },
+        'profile': function( tokens ) {
+           document.location.href = '/#!/users/'+theUser._id;
+         },
          'add': function( tokens ) {
           tokens.shift();
            var workerType = tokens.join( ' ' );

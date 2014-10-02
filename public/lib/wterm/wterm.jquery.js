@@ -368,7 +368,7 @@
                 if( commands.length > 1 ) { 
                   update_content( settings.PS1, current_value, commands.join( '<br>' ) );
                 } else if( commands.length == 1 ) {
-                  input.attr( 'value', commands.pop() + ' ' );  
+                  input.val(commands.pop() + ' ' );  
                 }
               }
             }
@@ -380,7 +380,7 @@
             e.preventDefault();
             if( settings.HISTORY ) {
               hcurrent  = ( hcurrent === null )? history.length - 1 : ( hcurrent == 0 ) ? history.length - 1 : hcurrent - 1;
-              input.attr( 'value', history[ hcurrent ] );
+              input.val(history[ hcurrent ] );
             }
           break;
 
@@ -390,7 +390,7 @@
             if( settings.HISTORY ) {
               if( hcurrent === null || hcurrent == (history.length - 1 ) ) break;
               hcurrent++;
-              input.attr( 'value', history[ hcurrent ] );
+              input.val(history[ hcurrent ] );
             }
           break;
 
