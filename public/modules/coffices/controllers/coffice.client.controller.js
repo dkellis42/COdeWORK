@@ -54,7 +54,6 @@ angular.module('coffices').controller('CofficeController', ['$scope', 'distance'
           for(var i in returnedData){
             if (returnedData[i].venue.photos.count > 0 ){
               var inFavorites = $scope.containsObject(returnedData[i], $scope.user.favoriteCoffices);
-              console.log('in fav', returnedData[i].venue.name + inFavorites);
               if(inFavorites === -1){
                 returnedData[i].favorite = false;
                } else {
@@ -66,11 +65,9 @@ angular.module('coffices').controller('CofficeController', ['$scope', 'distance'
            $scope.hoveredCoffice = $scope.testCoffices.list[0];
            $scope.hoverOnCoffice($scope.hoveredCoffice);
       });
+      console.log('init ran');
     };
     $scope.lookup = function(near, query, radius){ 
-      if (!near){
-        near = '78702';
-      }
       $scope.testCoffices  = {'list':[]};
       var foursquareQuery = $http.get('https://api.foursquare.com/v2/venues/explore?client_id=' + $scope.clientID + '&client_secret=' + $scope.clientSecret + '&venuePhotos=1&v=20140910&near=' + near +'&query=coffee,wifi' + query, {cache: true});
       foursquareQuery.success(function(data, status, headers, config) {
@@ -82,7 +79,10 @@ angular.module('coffices').controller('CofficeController', ['$scope', 'distance'
             }
           }
           }
+           $scope.hoveredCoffice = $scope.testCoffices.list[0];
+           $scope.hoverOnCoffice($scope.hoveredCoffice);
       });
+      
     };
     $scope.getFavorites = function(){
       for(var i in $scope.user.favoriteCoffices){
@@ -104,6 +104,7 @@ angular.module('coffices').controller('CofficeController', ['$scope', 'distance'
     $scope.hoverOnCoffice = function(coffice) {
       $scope.reviews = false;
 		  $scope.hoveredCoffice = coffice;
+      console.log('hover ran');
       $scope.map.center	= {
         latitude: $scope.hoveredCoffice.venue.location.lat,
         longitude: $scope.hoveredCoffice.venue.location.lng
@@ -190,8 +191,8 @@ angular.module('coffices').controller('CofficeController', ['$scope', 'distance'
         }
       ]
     };
-      $scope.$on('$destroy', function() {
-        elm.data('google-map').destroy();
-  });
+  //     $scope.$on('$destroy', function() {
+  //       elm.data('google-map').destroy();
+  // });
   }
 ]);

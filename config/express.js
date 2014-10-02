@@ -145,6 +145,7 @@ module.exports = function(db) {
 		});
 	});
 
-	 
+	var usernames = {};
+	var numUsers = 0;
 	return server;
 };

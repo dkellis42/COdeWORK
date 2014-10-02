@@ -1,6 +1,6 @@
-<section ng-animate="animate">
+<section ng-animate="animate" ng-click="hoverOnCoffice(coffice)" ng-repeat="coffice in testCoffices.list | unique: 'venue.name' | filter: keywords">
 
-  <div class="search-result col-xs-12 col-sm-4 col-md-4" ng-click="hoverOnCoffice(coffice)">
+  <div class="search-result col-xs-12 col-sm-4 col-md-4">
     <div class="overlay">
       <span ng-click="coffice.favorite=!coffice.favorite;favoriteCoffices(coffice)" ng-class="{'entypo-heart-empty': !coffice.favorite, 'entypo-heart': coffice.favorite}" tooltip="save to favorites" tooltip-placement="right"></span>
     </div>

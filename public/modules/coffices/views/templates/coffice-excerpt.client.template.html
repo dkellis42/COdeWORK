@@ -1,6 +1,6 @@
 <section class="coffice-excerpt" ui-scrollfix>
   <div class="row" ng-show="!reviews">
-    <h2 class="col-sm-9">{{hoveredCoffice.venue.name || 'Coffice!'}}</h2>
+    <h2 class="col-sm-9" data-ng-bind="hoveredCoffice.venue.name || 'Coffice!'"></h2>
     <div class="col-sm-3">
       <img src="modules/coffices/img/coffee.svg"/>
     </div>

@@ -1,8 +1,36 @@
 'use strict';
 
-angular.module('users').controller('SearchController', ['$scope', '$stateParams', 'geolocation', 'Users', 'Authentication', '$modal',
-  function($scope, $stateParams, geolocation, Users, Authentication, $modal) {
+angular.module('users').controller('SearchController', ['$scope', '$stateParams', 'geolocation', 'Users', 'Authentication', '$modal', 'socket',
+  function($scope, $stateParams, geolocation, Users, Authentication, $modal, socket) {
     $scope.user = Authentication.user;
+
+    var socket = io.connect();
+
+
+    $scope.msgs = ['hello', 'whats up?'];
+
+    $scope.sendMsg = function () {
+        socket.emit('send msg', $scope.msg);
+
+    }
+
+      // Socket listeners
+      // ===============
+    socket.emit('add user', $scope.user);
+
+
+    socket.on('get msg', function (data){
+        $scope.msgs.push(data);
+    });
+
+    var name = $scope.user.displayName;
+
+    socket.emit('connectToServer', {name: name});
+
+    socket.on('user-join', function (data) {
+        $scope.msgs.push(data);
+    });
+
         // Update a user profile
     $scope.updateUserProfile = function(isValid) {
       if (isValid){
