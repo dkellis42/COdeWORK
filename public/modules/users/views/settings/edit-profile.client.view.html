@@ -4,7 +4,7 @@
 		<h2>Some coders are nearby!</h2>
 		<p><small>Click any name to find out what they're working on.</small></p>
 		<ul class="coders col-sm-12 no-padding">
-			<li ng-class="{'online': getTimes(aUser.timeframe.beginWork, aUser.timeframe.endWork)}" class="col-sm-3 col-xs-12" ng-repeat="aUser in allUsers">
+			<li data-tooltip="{{aUser.displayName}}" data-username="{{aUser.displayName}}" ng-class="{'show-name': showName,'online': getTimes(aUser.timeframe.beginWork, aUser.timeframe.endWork)}" class="col-sm-3 col-xs-12" ng-repeat="aUser in allUsers">
 				<a data-ng-href="#!/users/{{aUser._id}}"><img width="100%" ng-src="{{aUser.providerData.avatar_url}}" /></a>
 			</li>
 		</ul>
@@ -15,6 +15,7 @@
 </div>
 <div class="col-sm-12 col-md-6 question-container" ui-scrollfix data-ng-controller="SettingsController">
 	<h2>Your Status</h2>
+	<alert ng-repeat="alert in alerts" type="{{alert.type}}" >{{alert.msg}}</alert>
 	<div class="question col-sm-12">
 		<h4>What are you working on?</h4><div class="arrow-right"></div>
 		<div click-to-edit="user.workingOn" user="user"></div>

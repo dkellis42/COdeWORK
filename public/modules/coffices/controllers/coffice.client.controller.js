@@ -106,7 +106,6 @@ angular.module('coffices').controller('CofficeController', ['$scope', 'distance'
     $scope.hoverOnCoffice = function(coffice) {
       $scope.reviews = false;
 		  $scope.hoveredCoffice = coffice;
-      console.log('hover ran');
       $scope.map.center	= {
         latitude: $scope.hoveredCoffice.venue.location.lat,
         longitude: $scope.hoveredCoffice.venue.location.lng

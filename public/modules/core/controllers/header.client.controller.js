@@ -13,7 +13,12 @@ angular.module('core').controller('HeaderController', ['$scope', 'Authentication
 		// Collapsing the menu after navigation
 		$scope.$on('$stateChangeSuccess', function() {
 			$scope.isCollapsed = false;
-			$scope.cPage = (/\w+/.exec(window.location.hash))[0];
+			var currRoute = /\w+/.exec(window.location.hash);
+			if (currRoute){
+				$scope.cPage = currRoute[0];
+			} else {
+				$scope.cPage = '';
+			}
 		});
 
 	}
