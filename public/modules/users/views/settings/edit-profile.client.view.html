@@ -2,26 +2,32 @@
 <div class="col-sm-12 col-md-6">
 	<div class="nearby col-sm-12" data-ng-controller="SettingsController">
 		<h2>Some coders are nearby!</h2>
-		<p><small>Click any name to find out what they're working on.</small></p>
+		<p><small>Hover to find out what they're working on.</small></p>
 		<ul class="coders col-sm-12 no-padding">
-			<li data-tooltip="{{aUser.displayName}}" data-username="{{aUser.displayName}}" ng-class="{'show-name': showName,'online': getTimes(aUser.timeframe.beginWork, aUser.timeframe.endWork)}" class="col-sm-3 col-xs-12" ng-repeat="aUser in allUsers">
+			<li data-tooltip="{{aUser.workingOn}}" ng-if="$index < 4" tooltip-placement="bottom" ng-class="{'show-name': showName,'online': getTimes(aUser.timeframe.beginWork, aUser.timeframe.endWork)}" class="col-sm-3 col-xs-12" ng-repeat="aUser in allUsers">
 				<a data-ng-href="#!/users/{{aUser._id}}"><img width="100%" ng-src="{{aUser.providerData.avatar_url}}" /></a>
 			</li>
 		</ul>
-		<p><a href="/#!/search">See the rest and search for more <span class="entypo-right-open-mini"></span><span class="entypo-right-open-mini"></span></a></p>
+		<h5><a href="/#!/search">See the rest and search for more &nbsp;<span class="entypo-right-bold"></span></a></h5>
 	</div>
 	<div class="nearby col-sm-12" id="terminal" data-ng-controller="SettingsController" ng-init="terminal.createTerminal(user)">
 	<p></p>
 </div>
 <div class="col-sm-12 col-md-6 question-container" ui-scrollfix data-ng-controller="SettingsController">
 	<h2>Your Status</h2>
-	<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
 	<div class="question col-sm-12">
 		<h4>What are you working on?</h4><div class="arrow-right"></div>
+		<alert ng-show="!user.workingOn" type="danger" close="closeAlert($index)">
+			Write about what you're working on to help you match with nearby coders.
+		</alert>
 		<div click-to-edit="user.workingOn" user="user"></div>
 	</div>
 	<div class="question col-sm-12" ng-controller="TimepickerCtrl">
 		<h4>Usual work hours</h4><div class="arrow-right"></div>
+		<alert ng-show="!user.timeframe" type="danger" close="closeAlert($index)">
+			Let other coders know when it's the best to work with you.<br/>
+			You'll appear 'online' during these hours. 
+		</alert>
 		<div class="col-sm-12">
 			  <timepicker class="col-sm-4" ng-model="user.timeframe.beginWork" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
 			  <div class="col-sm-2"><h2 class="black">to</h2></div>
@@ -33,6 +39,9 @@
 	</div>
 	<div class="question col-sm-12" data-ng-controller="SettingsController">
 		<h4>Need help with anything?</h4><div class="arrow-right"></div>
+		<alert ng-show="!user.needsHelpWith" type="warning" close="closeAlert($index)">
+			Let other coders know what you're stuck on, and you might find someone to help you out.
+		</alert>
 		<div click-to-edit="user.needsHelpWith" user="user"></div>
 	</div>
 	<div id="worker-types" class="question col-sm-12" data-ng-controller="SettingsController">

@@ -4,7 +4,6 @@ angular.module('users').controller('SettingsController', ['$scope', '$stateParam
 	function($scope, $stateParams, $http, $location, Users, Authentication, Terminal) {
 		$scope.user = Authentication.user;
 		$scope.terminal = Terminal;
-    $scope.alerts = [];
 		// If user is not signed in then redirect back home
 		if (!$scope.user) $location.path('/');
 		// Check if there are additional accounts 
@@ -38,13 +37,6 @@ angular.module('users').controller('SettingsController', ['$scope', '$stateParam
       };
 
     };
-
-    if (!$scope.user.workingOn){
-      $scope.alerts.push({type:'danger',msg: "Write about what you're currently working on to help you connect with other coders."});
-    }
-    if (!$scope.user.needsHelpWith){
-      $scope.alerts.push({type:'danger',msg: "Write about what you need help with, and you might get some."});
-    }
   $scope.closeAlert = function(index) {
     $scope.alerts.splice(index, 1);
   };

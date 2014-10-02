@@ -14,6 +14,11 @@
           </h1>
           <div class="bottom avatar"></div>
         </div>
+        <div class="hex" ng-show="getTimes(aUser.timeframe.beginWork, aUser.timeframe.endWork)}">
+          <div class="top avatar"></div>
+          <h4 class="lime">Coding now!</h4>
+          <div class="bottom avatar"></div>
+        </div>
     </div>
     <div class="hex-row even col-sm-12">
         <div ng-repeat="skill in user.skills" data-skill="{{skill}}" class="hex"><div class="top"></div><div class="middle"></div><div class="bottom"></div></div>
@@ -28,6 +33,8 @@
       <p ng-repeat="goal in user.goals" data-ng-bind="goal"></p>
     </div>
     <div class="col-sm-12 col-md-6 margin-top">
+      <h3 ng-show="user.timeframe">Usual work hours:</h3>
+      <p><span data-ng-bind="user.timeframe.beginWork | date:'shortTime'"></span> to <span data-ng-bind="user.timeframe.endWork | date:'shortTime'"></span></p>
       <h3 ng-show="user.favoriteCoffices">Favorite Coffices:</h3>
       <section ng-repeat="coffice in user.favoriteCoffices">
         <div class="search-result col-xs-12 col-sm-4 col-md-4">
