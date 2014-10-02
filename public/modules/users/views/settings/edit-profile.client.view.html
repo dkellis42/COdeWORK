@@ -5,7 +5,7 @@
 		<p><small>Click any name to find out what they're working on.</small></p>
 		<ul class="coders col-sm-12 no-padding">
 			<li ng-class="{'online': getTimes(aUser.timeframe.beginWork, aUser.timeframe.endWork)}" class="col-sm-3 col-xs-12" ng-repeat="aUser in allUsers">
-				<img width="100%" ng-src="{{aUser.providerData.avatar_url}}"/>
+				<a data-ng-href="#!/users/{{aUser._id}}"><img width="100%" ng-src="{{aUser.providerData.avatar_url}}" /></a>
 			</li>
 		</ul>
 		<p><a href="/#!/search">See the rest and search for more <span class="entypo-right-open-mini"></span><span class="entypo-right-open-mini"></span></a></p>
